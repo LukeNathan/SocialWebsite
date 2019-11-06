@@ -1,0 +1,28 @@
+p {
+    font-family: "Quicksand-Regular"
+}
+
+li {
+    font-family: "Quicksand-Regular"
+}
+
+button {
+    border: none;
+    color: white;
+    background-color: #5999ff;
+    padding: 5px 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-family: "Quicksand-Bold"
+}
+
+button a:hover {
+    background-color: gold;
+    color: darkslategrey;
+  }
+
+h1 {
+    font-family: "Quicksand-Regular"
+}
