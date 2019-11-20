@@ -1,0 +1,175 @@
+
+<!-- Welcome to some sample code to control your Firebase Database -->
+<!-- HERE IS YOUR HTML TO SET UP YOUR PAGE -->
+<html>
+    <head>
+        <!-- HERE ARE YOUR FIREBASE and GOOGLE AUTHENICATION IMPORTS -->
+        <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase.js"></script>
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+        <link rel="stylesheet" type="text/css" href="index.css">
+        <!DOCTYPE html>
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+       <nav>
+            <div class="nav-wrapper">
+            <a href="#" class="brand-logo right"><img id="upic" height=55 width=55 class="circle"></img></a>
+            <ul class="left hide-on-med-and-down">
+                <li class="active"><a href="sass.html">Home</a></li>
+                <li><a href="classes.html">Classes</a></li>
+                <li><a href="msgs.html">Messages</a></li>
+                <li><a href="notifs.html">Notifications</a></li>
+            </ul>
+            </div>
+        </nav>
+
+    </head>
+    <body>
+        <div align="center">
+            <h1>Welcome, </h1>
+            <h1 id="uid"></h1>
+            <img id="upic" height=100 width=100 class="circle"></img>
+        </div>
+        <button class="btn waves-effect waves-light" type="submit" name="action" onclick="signin()">Sign in with Google</button>
+            <div id="info"></div>
+
+            <form action="/action_page.php">
+                <div class="row">
+                        <form class="col s12">
+                          <div class="row">
+                            <div class="input-field col s6">
+                              <input id="tweet" type="text" data-length="100">
+                              <label for="tweet">Input text</label>
+                            </div>
+                          </div>
+                        </form>
+                </div>
+            </form>
+            <button class="btn waves-effect waves-light" type="submit" name="action" onclick="pushData()">Submit
+                <i class="material-icons right">send</i>
+            </button>
+            <button class="btn waves-effect waves-light" type="submit" name="action" onclick="getData()">Get data</button>
+            <button class="btn waves-effect waves-light" type="submit" name="action" onclick="setData()">Edit data</button>
+            <button class="btn waves-effect waves-light" type="submit" name="action" onclick="updateData()">Update data</button>
+            <button class="btn waves-effect waves-light" type="submit" name="action" onclick="removeData()">Remove data</button>
+
+    <displayMsg id=outputMsg></displayMsg>
+
+    </body>
+    
+    <!-- HERE IS THE JAVASCRIPT TO CONNECT TO YOUR FIREBASE -->
+    <script>
+        // Your web app's Firebase configuration
+        userId = "";
+
+        var config = {
+            apiKey: "AIzaSyDPoyq1ioNdgUn9IpnTFLjo6VwL36YdF38",
+            authDomain: "basic-bc60e.firebaseapp.com",
+            databaseURL: "https://basic-bc60e.firebaseio.com",
+            projectId: "basic-bc60e",
+            storageBucket: "basic-bc60e.appspot.com",
+            messagingSenderId: "510527790639",
+            appId: "1:510527790639:web:5be8ebfafbab992c5070da",
+            measurementId: "G-TDDH2CNDSF"
+          };
+        firebase.initializeApp(config);
+               
+        // Check to see if you are logged in
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user == null) {
+                document.getElementById("uid").innerHTML = "not logged in";
+                return;
+            } else {
+                userId = user.uid; // you can also get .displayName, .photoURL, .email
+                name = user.displayName;
+                userImage = user.photoURL
+                document.getElementById("uid").innerHTML = name; // display Google uid on page
+                document.getElementById("upic").src = userImage;
+
+                
+            } // end user null check
+        }); // end check auth state
+        
+       // HERE IS THE FUNCTION TO SHOW HOW TO GET USER DATA
+       function getData() {
+            var userId = document.getElementById("uid").innerHTML;
+                firebase.database().ref('/tweets/' + userId).once('value', function(snapshot) {
+                var data = snapshot.val();
+                var i;
+                var displayMsg = document.getElementById("outputMsg")
+                displayMsg.innerHTML = ""
+                for (i=snapshot.numChildren()-1; i >= 0; i--){
+                    var lastindex = Object.keys(snapshot.val())[i];
+                    displayMsg.innerHTML += "<div class='card'><p>" + snapshot.val()
+            [lastindex].tweet +"</p> <p>Time Posted: " + snapshot.val()
+            [lastindex].time +"</p></div>"
+                    }
+                });
+       }
+       
+       // HERE IS THE FUNCTION TO SHOW HOW TO SET/OVERWRITE USER DATA
+       function setData() {
+           var userId = document.getElementById("uid").innerHTML;
+           var js_time = Date.now();
+           firebase.database().ref('/tweets/' + userId).set({tweet:"Set overwrites the data widehard", time: js_time}); 
+       }
+        
+       // HERE IS THE FUNCTION TO SHOW HOW TO SET/OVERWRITE USER DATA
+       function updateData() {
+           var userId = document.getElementById("uid").innerHTML;
+           firebase.database().ref('/tweets/' + userId).update({tweet:"Update replaces data, but will leave non replaced data as is"}); 
+       }
+         
+        // HERE IS THE FUNCTION TO SHOW HOW TO PUSH/ADD NEW USER DATA TO EXISTING DATABASE
+        function pushData() {
+            var userId = document.getElementById("uid").innerHTML;
+            var tweet = document.getElementById("tweet").value;
+            var js_time = Date.now();
+            var tweetid = firebase.database().ref('tweets/' + userId + "/").push({tweet: tweet, time: js_time});
+            document.getElementById("tweet").value = "";
+            var li = ('li', userId + ": " + tweet + "at " + js_time)
+
+            var userId = document.getElementById("uid").innerHTML;
+                firebase.database().ref('/tweets/' + userId).once('value', function(snapshot) {
+                var data = snapshot.val();
+                var i;
+                var displayMsg = document.getElementById("outputMsg")
+                displayMsg.innerHTML = ""
+                for (i=snapshot.numChildren()-1; i >= 0; i--){
+                    var lastindex = Object.keys(snapshot.val())[i];
+                    displayMsg.innerHTML += "<div class='card'><p>" + snapshot.val()
+            [lastindex].tweet +"</p> <p>Time Posted: " + snapshot.val()
+            [lastindex].time +"</p></div>"
+                    }
+                });
+            
+        }
+
+        // HERE IS THE FUNCTION TO SHOW HOW TO REMOVE USER DATA FROM EXISTING DATABASE - BE CAREFUL!
+        function removeData() {
+            var tweetid = firebase.database().ref('tweets/' + userId + "/").remove();
+        }
+        
+        function signin() {
+            var provider = new firebase.auth.GoogleAuthProvider();
+            firebase.auth().signInWithRedirect(provider).then(function(result) { 
+                window.location.replace("fbtest.html");
+            });
+        }
+       
+
+       // $(document).ready(function() {
+            //$('input#tweet').characterCounter();
+        //});
+
+        //function gotData(data) { 
+           // var msgs = .val();
+            //var keys = Object.keys(msgs);
+            //console.log(keys);
+        //}
+    </script>
+</html>
