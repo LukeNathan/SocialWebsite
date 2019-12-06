@@ -1,0 +1,273 @@
+<html>
+    <head>
+        <!-- HERE ARE YOUR FIREBASE and GOOGLE AUTHENICATION IMPORTS -->
+        <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase.js"></script>
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+        <link rel="stylesheet" type="text/css" href="index.css">
+        <!DOCTYPE html>
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+        <!-- Top NavBar -->
+        <nav>
+            <div class="nav-wrapper">
+            <a href="#" class="brand-logo right"><img id="upics" height=55 width=55 class="circle"></img></a>
+            <ul class="left hide-on-med-and-down">
+                <li class="active"><a href="WebDemo1.html">Home</a></li>
+                <li><a href="classes.html">Classes</a></li>
+                <li><a href="messages.html">Messages</a></li>
+                <li><a href="notifs.html">Notifications</a></li>
+            </ul>
+        </div>
+    </nav>
+
+        <!-- SideNav menu-->
+        <ul id="slide-out" class="sidenav">
+                <li><div class="user-view">
+                    <div class="background">
+                        <img src="images/office.jpg">
+                    </div>
+                    <a href="#user"><img class="circle" id="upicsides"></a>
+                    <a href="#name"><span class="white-text name">Luke Nathan</span></a>
+                    <a href="#email"><span class="white-text email">luke.nathan@ucc.on.ca</span></a>
+                </div></li>
+                <li><a class="waves-effect" onclick="signin()">Sign in with Google</a></li>
+                <li><a class="waves-effect" href="#!">Second Link</a></li>
+                <li><div class="divider"></div></li>
+                <li><a class="subheader">Account Settings</a></li>
+                <li><a class="waves-effect" href="https://myaccount.google.com/?pli=1">Google Account Settings</a></li>
+                <li><a class="waves-effect" href="#!">Account Options</a></li>
+            </ul>
+            <a href="#" data-target="slide-out" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
+
+</head>
+
+<body>
+
+<div align="center">
+    <h1>Welcome,</h1>   
+    <h1>Luke Nathan</h1>
+</div>
+
+<p class="col s2">TODAY IS WED JAN 7</p>
+<p class="col s2">IT IS A DAY 6</p>
+<p class="col s2">PERIOD 3</p>
+
+</br>
+</br>
+</br>
+</br>
+
+    <div class="row">
+            <div class="col m6">
+              <div class="card red lighten-2">
+                <div class="card-content white-text">
+                  <span><h2>New Announcements</h2></span>
+                </br>
+                <ul align="left">
+                    <li><h5>Assignment Late?</h5></li>
+                    <li><h5>Homework for Jan 9</h5></li>
+                    <li><h5>Hockey Tryouts</h5></li>
+                    <li><h5>Stewards Announcements</h5></li>
+                </ul>
+                </div>
+                <div  align="center" class="card-action">
+                    <i class="material-icons" style="color:white">add</i>
+                </div>
+              </div>
+            </div>
+    
+            <div class="col m6">
+            <div class="card red lighten-2">
+                <div class="card-content white-text">
+                    <span><h2>New Posts</h2></span>
+                </br>
+                    <ul align="left">
+                        <li><h5>Assembly Today?</h5></li>
+                        <li><h5>Hockey Tryouts?</h5></li>
+                        <li><h5>Chem Homework</h5></li>
+                        <li><h5>New Coding Quiz Results</h5></li>
+                    </ul>
+                </div>
+                <div align="center" class="card-action">
+                    <i class="material-icons" style="color:white">add</i>
+                </div>
+                </div>
+            </div>
+    </div>
+
+  <div class="row" align="center">
+        <div class="col s12 m6 offset-s6">
+            <div class="card-content black-text">
+              <h5>Your Average Scores</h5>
+              <canvas align="center" id="myChart" width="2" height="2" class="col s1"></canvas>
+            </div>
+            <div class="card-action">
+            </div>
+          </div>
+
+            <div class="col s12 m6">
+              <div class="card white">
+                <div align="left" class="card-content black-text">
+                  <span class="card-title">Grade Leaderboard</span>
+                  <ul class="collection">
+                        <li class="collection-item avatar">
+                            <i class="material-icons circle blue">airport_shuttle</i>
+                          <span class="title">Luke Nathan</span>
+                          <p>76 average points<br>
+                             243 total points
+                          </p>
+                          <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                        </li>
+                        <li class="collection-item avatar">
+                          <i class="material-icons circle">folder</i>
+                          <span class="title">Terry Wang</span>
+                          <p>71 average points<br>
+                             236 total points
+                          </p>
+                          <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                        </li>
+                        <li class="collection-item avatar">
+                          <i class="material-icons circle green">insert_chart</i>
+                          <span class="title">Luca Adamo</span>
+                          <p>68 average points<br>
+                             219 total points
+                          </p>
+                          <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                        </li>
+                        <li class="collection-item avatar">
+                          <i class="material-icons circle red">play_arrow</i>
+                          <span class="title">Jason Lee</span>
+                          <p>68 average points<br>
+                             218 total points
+                          </p>
+                          <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                        </li>
+                        <li class="collection-item avatar">
+                            <i class="material-icons circle orange">airplay</i>
+                            <span class="title">Justin Lo</span>
+                            <p>65 average points<br>
+                                203 total points
+                            </p>
+                            <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                        </li>
+                        <li class="collection-item avatar">
+                            <i class="material-icons circle purple">archive</i>
+                            <span class="title">Will Trojniak</span>
+                            <p>61 average points<br>
+                                187 total points
+                            </p>
+                            <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                        </li>
+                        <li class="collection-item avatar">
+                            <i class="material-icons circle brown">art_track</i>
+                            <span class="title">Eric An</span>
+                            <p>60 average points<br>
+                                185 total points
+                            </p>
+                            <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                        </li>
+
+                      </ul>
+                </div>
+                <div class="card-action">
+                </div>
+              </div>
+            </div>
+          </div>
+
+    
+</body>
+
+<script>
+
+        import Chart from 'chart.js'
+
+        // Your web app's Firebase configuration
+        userId = "";
+
+        var config = {
+            apiKey: "AIzaSyDPoyq1ioNdgUn9IpnTFLjo6VwL36YdF38",
+            authDomain: "basic-bc60e.firebaseapp.com",
+            databaseURL: "https://basic-bc60e.firebaseio.com",
+            projectId: "basic-bc60e",
+            storageBucket: "basic-bc60e.appspot.com",
+            messagingSenderId: "510527790639",
+            appId: "1:510527790639:web:5be8ebfafbab992c5070da",
+            measurementId: "G-TDDH2CNDSF"
+          };
+        firebase.initializeApp(config);
+               
+        // Check to see if you are logged in
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user == null) {
+                document.getElementById("uid").innerHTML = "not logged in";
+                return;
+            } else {
+                userId = user.uid; // you can also get .displayName, .photoURL, .email
+                name = user.displayName;
+                userImage = user.photoURL
+                document.getElementById("uid").innerHTML = name; // display Google uid on page
+                document.getElementById("upics").src = userImage;
+                document.getElementById("upicsides").src = userImage;
+
+                
+            } // end user null check
+        }); // end check auth state
+
+        var elem = document.querySelector('.sidenav');
+            var instance = new M.Sidenav(elem, {edge:'right'});
+
+</script>
+
+<script src="path/to/chartjs/dist/Chart.js"></script>
+
+<script>
+
+//chart
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Jan 1', 'Jan 2', 'Jan 3', 'Jan 4', 'Jan 5', 'Jan 6'],
+        datasets: [{
+            label: 'Average Class Score',
+            data: [8, 4, 9, 6, 7, 7],
+            backgroundColor: [
+                'rgba(115, 201, 119, 0.5)',
+                'rgba(255, 99, 132, 0.5)',
+                'rgba(126, 224, 131, 0.5)',
+                'rgba(255, 206, 86, 0.5)',
+                'rgba(75, 192, 192, 0.5)',
+                'rgba(75, 192, 192, 0.5)'
+            ],
+            borderColor: [
+                'rgba(115, 201, 119, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(126, 224, 131, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(75, 192, 192, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        maintainAspectRatio: false
+    },
+    options: {
+        scales: {
+            yAxes: [{ 
+                ticks: {
+                    min: 0
+                }
+            }]
+        }
+    },
+});
+
+</script>
