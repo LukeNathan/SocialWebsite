@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+        <head>
+                <!-- HERE ARE YOUR FIREBASE and GOOGLE AUTHENICATION IMPORTS -->
+                <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase.js"></script>
+                <script src="https://apis.google.com/js/platform.js" async defer></script>
+                <link rel="stylesheet" type="text/css" href="index.css">
+                <!DOCTYPE html>
+                <!-- Compiled and minified CSS -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        
+                <!-- Compiled and minified JavaScript -->
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+                <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+                <!-- Top NavBar -->
+                <nav>
+                    <div class="nav-wrapper">
+                    <a href="#" class="brand-logo right"><img id="upicd" height=55 width=55 class="circle"></img></a>
+                    <ul class="left hide-on-med-and-down">
+                        <li><a href="WebDemo1.html">Home</a></li>
+                        <li class="active"><a href="classes.html">Classes</a></li>
+                        <li><a href="messages.html">Messages</a></li>
+                        <li><a href="notifs.html">Notifications</a></li>
+                    </ul>
+                    </div>
+                </nav>
+</head>
+<body>
+
+    <h1 align=center>Your Classes</h1>
+    <br>
+    <br>
+    <br>
+    <div class="collection">
+        <a href="#!" class="collection-item"><span class="new badge">2</span>English</a>
+        <a href="#!" class="collection-item"><span class="new badge">6</span>French</a>
+        <a href="#!" class="collection-item">Math</a>
+        <a href="#!" class="collection-item"><span class="new badge">1</span>Chemistry</a>
+        <a href="#!" class="collection-item">Physics</a>
+        <a href="#!" class="collection-item"><span class="new badge">5</span>Coding</a>
+        <a href="#!" class="collection-item">Gym</a>
+        <a href="#!" class="collection-item">History</a>
+    </div>
+
+</body>
+</html>
+
+<script>
+        // Your web app's Firebase configuration
+        userId = "";
+
+        var config = {
+            apiKey: "AIzaSyDPoyq1ioNdgUn9IpnTFLjo6VwL36YdF38",
+            authDomain: "basic-bc60e.firebaseapp.com",
+            databaseURL: "https://basic-bc60e.firebaseio.com",
+            projectId: "basic-bc60e",
+            storageBucket: "basic-bc60e.appspot.com",
+            messagingSenderId: "510527790639",
+            appId: "1:510527790639:web:5be8ebfafbab992c5070da",
+            measurementId: "G-TDDH2CNDSF"
+          };
+        firebase.initializeApp(config);
+               
+        // Check to see if you are logged in
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user == null) {
+                document.getElementById("uid").innerHTML = "not logged in";
+                return;
+            } else {
+                userId = user.uid; // you can also get .displayName, .photoURL, .email
+                name = user.displayName;
+                userImage = user.photoURL
+                document.getElementById("uid").innerHTML = name; // display Google uid on page
+                document.getElementById("upic").src = userImage;
+                document.getElementById("upicside").src = userImage;
+
+                
+            } // end user null check
+        }); // end check auth state
+</script>
