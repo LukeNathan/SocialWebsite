@@ -17,9 +17,9 @@
             <div class="nav-wrapper">
             <a href="#" class="brand-logo right"><img id="upics" height=55 width=55 class="circle"></img></a>
             <ul class="left hide-on-med-and-down">
-                <li class="active"><a href="WebDemo1.html">Home</a></li>
+                <li class="active"><a href="index.html">Home</a></li>
                 <li><a href="classes.html">Classes</a></li>
-                <li><a href="messages.html">Messages</a></li>
+                <li><a href="message.html">Messages</a></li>
                 <li><a href="notifs.html">Notifications</a></li>
             </ul>
         </div>
@@ -57,6 +57,8 @@
 <p class="col s2">IT IS A DAY 6</p>
 <p class="col s2">PERIOD 3</p>
 
+<p id="date"></p>
+
 </br>
 </br>
 </br>
@@ -75,8 +77,11 @@
                     <li><h5>Stewards Announcements</h5></li>
                 </ul>
                 </div>
-                <div  align="center" class="card-action">
+                <div align="center" class="card-action">
                     <i class="material-icons" style="color:white">add</i>
+                </div>
+                <div>
+                    <a align="center" class="btn-flat" style="color:white">+</a>
                 </div>
               </div>
             </div>
@@ -275,6 +280,12 @@ var myChart = new Chart(ctx, {
 
 var elem = document.querySelector('.sidenav');
             var instance = new M.Sidenav(elem, {edge:'right'});
+
+n =  new Date();
+y = n.getFullYear();
+m = n.getMonth() + 1;
+d = n.getDate();
+document.getElementById("date").innerHTML = m + "/" + d + "/" + y;
 
     </script>
 

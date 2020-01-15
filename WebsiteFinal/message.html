@@ -16,9 +16,9 @@
             <div class="nav-wrapper">
             <a href="#" class="brand-logo right"><img id="upic" height=55 width=55 class="circle"></img></a>
             <ul class="left hide-on-med-and-down">
-                <li class="active"><a href="index.html">Home</a></li>
+                <li><a href="index.html">Home</a></li>
                 <li><a href="classes.html">Classes</a></li>
-                <li><a href="messages.html">Messages</a></li>
+                <li class="active"><a href="message.html">Messages</a></li>
                 <li><a href="notifs.html">Notifications</a></li>
             </ul>
             </div>
@@ -45,21 +45,24 @@
 
     </head>
     <body>
-        <div align="center">
-            <h1>Welcome, </h1>
-            <h1 id="uid"></h1>
-            <img id="upic" height=100 width=100 class="circle"></img>
-        </div>
             <div id="info"></div>
 
             <!--Text box to submit data-->
+
+            <displayMsg id=outputMsg></displayMsg>
+
             <form action="/action_page.php">
                 <div class="row">
-                        <form class="col s12">
+                        <form class="col s10">
                           <div class="row">
-                            <div class="input-field col s6">
+                            <div class="input-field col s10">
                               <input id="tweet" type="text" data-length="100">
-                              <label for="tweet">Input text</label>
+                              <label for="tweet">Send a message</label>
+                        <div class="col s2 offset-s10">
+                            <button class="btn waves-effect waves-light" type="submit" name="action" onclick="pushData()">Submit
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </div>
                             </div>
                           </div>
                         </form>
@@ -67,15 +70,7 @@
             </form>
 
             <!-- Buttons -->
-            <button class="btn waves-effect waves-light" type="submit" name="action" onclick="pushData()">Submit
-                <i class="material-icons right">send</i>
-            </button>
-            <button class="btn waves-effect waves-light" type="submit" name="action" onclick="getData()">Get data</button>
-            <button class="btn waves-effect waves-light" type="submit" name="action" onclick="setData()">Edit data</button>
-            <button class="btn waves-effect waves-light" type="submit" name="action" onclick="updateData()">Update data</button>
             <button class="btn waves-effect waves-light" type="submit" name="action" onclick="removeData()">Remove data</button>
-
-    <displayMsg id=outputMsg></displayMsg>
 
     </body>
     
