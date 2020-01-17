@@ -49,19 +49,32 @@
 
             <!--Text box to submit data-->
 
+    <!-- Dropdown Trigger -->
+    <div class="col s6 offset-s1">
+        <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Message</a>
+    </div>
+
+  <!-- Dropdown Structure -->
+
+    <ul id='dropdown1' class='dropdown-content offset-s1'>
+        <li><a href="#!">Terry Wang</a></li>
+        <li><a href="#!">Luca Adamo</a></li>
+    </ul>
+
             <displayMsg id=outputMsg></displayMsg>
 
             <form action="/action_page.php">
                 <div class="row">
-                        <form class="col s10">
+                        <form class="col s12">
                           <div class="row">
-                            <div class="input-field col s10">
+                            <div class="input-field col s12">
                               <input id="tweet" type="text" data-length="100">
                               <label for="tweet">Send a message</label>
-                        <div class="col s2 offset-s10">
+                        <div>
                             <button class="btn waves-effect waves-light" type="submit" name="action" onclick="pushData()">Submit
                                 <i class="material-icons right">send</i>
                             </button>
+                            <button class="btn waves-effect waves-light" type="submit" name="action" onclick="removeData()">Delete Message</button>
                         </div>
                             </div>
                           </div>
@@ -70,12 +83,14 @@
             </form>
 
             <!-- Buttons -->
-            <button class="btn waves-effect waves-light" type="submit" name="action" onclick="removeData()">Remove data</button>
 
     </body>
     
     <!-- HERE IS THE JAVASCRIPT TO CONNECT TO YOUR FIREBASE -->
     <script>
+
+    M.AutoInit();
+
         // Your web app's Firebase configuration
         userId = "";
 
