@@ -53,10 +53,6 @@
     <h1 id="uid"></h1>
 </div>
 
-<p class="col s2">TODAY IS WED JAN 7</p>
-<p class="col s2">IT IS A DAY 6</p>
-<p class="col s2">PERIOD 3</p>
-
 <p id="date"></p>
 
 </br>
@@ -226,6 +222,13 @@
                 
             } // end user null check
         }); // end check auth state
+
+        function signin() {
+            var provider = new firebase.auth.GoogleAuthProvider();
+            firebase.auth().signInWithRedirect(provider).then(function(result) { 
+                window.location.replace("fbtest.html");
+            });
+        }
 
         var elem = document.querySelector('.sidenav');
             var instance = new M.Sidenav(elem, {edge:'right'});
