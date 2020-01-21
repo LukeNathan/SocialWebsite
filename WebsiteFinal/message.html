@@ -50,15 +50,32 @@
             <!--Text box to submit data-->
 
     <!-- Dropdown Trigger -->
-    <div class="col s6 offset-s1">
-        <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Message</a>
-    </div>
+    <br>
+
 
   <!-- Dropdown Structure -->
 
-    <ul id='dropdown1' class='dropdown-content offset-s1'>
-        <li><a href="#!">Terry Wang</a></li>
-        <li><a href="#!">Luca Adamo</a></li>
+<div class="input-field col s12">
+    <select>
+        <option value="" disabled selected>   Message a friend</option>
+        <div class="col s6 offset-s1">
+            <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Message</a>
+        </div>
+        <option value="1">   Terry Wang</option>
+        <option value="2">   Luca Adamo</option>
+        <option value="3">   William Trojniak</option>
+    </select>
+    <label>Choose who to message</label>
+</div>
+
+
+    <!-- Messages Collection -->
+    <br>
+    <ul class="collection">
+        <li class="collection-item">message</li>
+        <li class="collection-item">Alvin</li>
+        <li class="collection-item">Alvin</li>
+        <li class="collection-item">Alvin</li>
     </ul>
 
             <displayMsg id=outputMsg></displayMsg>
@@ -213,6 +230,19 @@
     $(document).ready(function(){
         $('.sidenav').sidenav();
     });
+
+    $(document).ready(function(){
+        $('select').formSelect();
+    });
+
+    $(document).ready(function(){
+        $('.dropdown-button').dropdown('open');
+    })
+        $('#dropdown1 li').click(function(){
+
+            a = $(this).text()
+            $('.dropdownBtn').text(a)
+        })
 
 </script>
 
