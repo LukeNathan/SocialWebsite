@@ -17,7 +17,7 @@
                 <!-- Top NavBar -->
                 <nav>
                     <div class="nav-wrapper">
-                    <a href="#" class="brand-logo right"><img id="upicd" height=55 width=55 class="circle"></img></a>
+                    <a href="#" class="brand-logo right"><img id="upic" height=55 width=55 class="circle"></img></a>
                     <ul class="left hide-on-med-and-down">
                         <li><a href="index.html">Home</a></li>
                         <li class="active"><a href="classes.html">Classes</a></li>
@@ -77,13 +77,21 @@
                 userId = user.uid; // you can also get .displayName, .photoURL, .email
                 name = user.displayName;
                 userImage = user.photoURL
-                document.getElementById("uid").innerHTML = name; // display Google uid on page
+                //document.getElementById("uid").innerHTML = name; // display Google uid on page
                 document.getElementById("upic").src = userImage;
                 document.getElementById("upicside").src = userImage;
 
                 
             } // end user null check
         }); // end check auth state
+
+        function signin() {
+            var provider = new firebase.auth.GoogleAuthProvider();
+            firebase.auth().signInWithRedirect(provider).then(function(result) { 
+                window.location.replace("fbtest.html");
+            });
+        };
+
 </script>
 
 <script src="path/to/chartjs/dist/Chart.js"></script>

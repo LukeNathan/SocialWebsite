@@ -80,7 +80,7 @@
 
             <displayMsg id=outputMsg></displayMsg>
 
-            <form action="/action_page.php">
+            <form>
                 <div class="row">
                         <form class="col s12">
                           <div class="row">
@@ -88,7 +88,7 @@
                               <input id="tweet" type="text" data-length="100">
                               <label for="tweet">Send a message</label>
                         <div>
-                            <button class="btn waves-effect waves-light" type="submit" onclick="pushData()">Submit
+                            <button class="btn waves-effect waves-light" type="submit" name="action" onclick="pushData()">Submit
                                 <i class="material-icons right">send</i>
                             </button>
                             <button class="btn waves-effect waves-light" type="submit" name="action" onclick="removeData()">Delete Message</button>
@@ -132,7 +132,7 @@
                 userId = user.uid; // you can also get .displayName, .photoURL, .email
                 name = user.displayName;
                 userImage = user.photoURL
-                document.getElementById("uid").innerHTML = name; // display Google uid on page
+                //document.getElementById("uid").innerHTML = name; // display Google uid on page
                 document.getElementById("upic").src = userImage;
                 document.getElementById("upicside").src = userImage;
 
@@ -174,10 +174,7 @@
         function pushData() {
             var userId = document.getElementById("uid").innerHTML;
             var tweet = document.getElementById("tweet").value;
-            var today = new Date();
-            var date = (today.getMonth()+1)+'-'+today.getDate()+'-'+today.getFullYear();
-            var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-            var js_time = date+' '+time;
+            var js_time = Date.now();
             var tweetid = firebase.database().ref('tweets/' + userId + "/").push({tweet: tweet, time: js_time});
             document.getElementById("tweet").value = "";
             var li = ('li', userId + ": " + tweet + "at " + js_time)
