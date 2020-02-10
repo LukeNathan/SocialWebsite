@@ -63,9 +63,10 @@
             <div class="col s6 offset-s1">
                 <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Message</a>
             </div>
-            <option value="1">   Terry Wang</option>
-            <option value="2">   Luca Adamo</option>
-            <option value="3">   William Trojniak</option>
+            <option value="1">   Class</option>
+            <option value="2">   Terry Wang</option>
+            <option value="3">   Luca Adamo</option>
+            <option value="4">   William Trojniak</option>
         </select>
         <label>Choose who to message</label>
     </div>
@@ -174,7 +175,7 @@
             document.getElementById("tweet").value = "";
             var li = ('li', userId + ": " + tweet + "at " + js_time)
 
-            var userId = document.getElementById("uid").innerHTML;
+            //var userId = document.getElementById("uid").innerHTML;
                 firebase.database().ref('/tweets/' + userId).once('value', function(snapshot) {
                 var data = snapshot.val();
                 var i;
@@ -217,5 +218,9 @@
             //var keys = Object.keys(msgs);
             //console.log(keys);
         //}
+
+        //rule:  ".validate": "newData.hasChildren(['tweet', 'time']) && newData.child('time').val() > (now - 300)"
+
     </script>
 </html>
+
