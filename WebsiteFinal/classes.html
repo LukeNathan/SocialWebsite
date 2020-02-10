@@ -4,55 +4,209 @@
                 <!-- HERE ARE YOUR FIREBASE and GOOGLE AUTHENICATION IMPORTS -->
                 <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase.js"></script>
                 <script src="https://apis.google.com/js/platform.js" async defer></script>
-                <link rel="stylesheet" type="text/css" href="index.css">
+                <link rel="stylesheet" type="text/css" href="ustylesheet.css">
                 <!DOCTYPE html>
                 <!-- Compiled and minified CSS -->
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-        
+                <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap" rel="stylesheet">
                 <!-- Compiled and minified JavaScript -->
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
                 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-                <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+                <!-- Chart -->
+                <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+        </head>
 
-                <!-- Top NavBar -->
-                <nav>
-                    <div class="nav-wrapper">
-                    <a href="#" class="brand-logo right"><img id="upic" height=55 width=55 class="circle"></img></a>
-                    <ul class="left hide-on-med-and-down">
-                        <li><a href="index.html">Home</a></li>
-                        <li class="active"><a href="classes.html">Classes</a></li>
-                        <li><a href="newmessage.html">Messages</a></li>
-                        <li><a href="notifs.html">Notifications</a></li>
-                    </ul>
-                    </div>
-                </nav>
-</head>
-<body>
+    <!-- Top NavBar -->
+    <nav>
+        <div class="nav-wrapper">
+        <a href="#" class="brand-logo right"><img id="upicd" height=55 width=55 class="circle"></img></a>
+        <ul class="left hide-on-med-and-down">
+            <li><a href="index.html">Home</a></li>
+            <li class="active"><a href="classes.html">Classes</a></li>
+            <li><a href="messages.html">Messages</a></li>
+            <li><a href="notifs.html">Notifications</a></li>
+        </ul>
+        </div>
+    </nav>
 
-    <h1 align=center>Your Classes</h1>
-    <br>
-    <br>
-    <br>
+    <h1 align=center>Your Class</h1>
 
-    <div class="row">
-            <div class="col s12 m6">
-              <div class="card white">
-                <div class="card-content black-text">
-                  <span class="card-title">English</span>
-                  <canvas id="myChart" width="2" height="2" class="col s1"></canvas>
-                </div>
-                <div class="card-action">
-                  <a href="#">Class Page</a>
-                  <a href="#">Class Messages</a>
-                </div>
-              </div>
+    <!--div class="">
+        <div class="card" style="width:76%;height:70%;margin-left:12%;">
+            <div class="card-content">
+                <p class="card-title" style="text-align:center;">English</p>
+                <p class="grey-text" style="font-size:17px;text-align:center">0 Points</p>
+                <canvas id="englishChart" style="width:370px;height:280px;"></canvas>
+            <div class="card-action center-align"">
             </div>
-          </div>
+            </div>
+        </div>
+
+        <div class="card col s4" style="width:370px;height:407px;margin-left:37px;">
+            <div class="card-content">
+                <p class="card-title" style="text-align:center;">French</p>
+                <p class="grey-text" style="font-size:17px;text-align:center">0 Points</p>
+                <canvas id="frenchChart" style="width:370px;height:280px;"></canvas>
+            <div class="card-action center-align">
+                <a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Class Page</a>
+            </div>
+            </div>
+        <!--div>
+
+        <div class="card col s4" style="width:370px;height:407px;margin-left:37px;">
+            <div class="card-content">
+                <p class="card-title" style="text-align:center;">Math</p>
+                <p class="grey-text" style="font-size:17px;text-align:center">0 Points</p>
+                <canvas id="mathChart" style="width:370px;height:280px;"></canvas>
+            <div class="card-action center-align">
+                <a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Class Page</a>
+            </div>
+            </div>
+        </div>
+    </div-->
+    
+    <div class="row center-align">
+        <div class="col s12 m6 offset-s6">
+            <h4 class="center-align">Your Average Scores</h4>
+            <h6 style="color:grey;">Your Score:</h6>
+            <canvas align="center" id="classChart" width="50%" height="57px" class="col s1"></canvas>
+        </div>
+
+        <div class="col s12 m6">
+            <div class="card">
+            <div align="left" class="card-content black-text">
+                <span style="font-family:'Roboto',sans-serif;font-weight:400;font-size:37px">Grade Leaderboard</span><br>
+                <span style="font-family:'Roboto',sans-serif;font-weight:200;font-size:30px">Total Points: </span><span style="font-family:'Roboto',sans-serif;font-weight:200;font-size:30px">243</span><br>
+                <span style="font-family:'Roboto',sans-serif;font-weight:200;font-size:30px">Average Points: </span><span style="font-family:'Roboto',sans-serif;font-weight:200;font-size:30px">76</span><br>
+                <span style="font-family:'Roboto',sans-serif;font-weight:200;font-size:30px">You are in: </span><span style="font-family:'Roboto',sans-serif;font-weight:200;font-size:30px">1st</span><br>
+                <ul class="collection">
+                    <li class="collection-item avatar">
+                        <i class="material-icons circle blue">airport_shuttle</i>
+                        <span class="title">Luke Nathan</span><br>
+                        <span>76</span><span> average points</span><br>
+                            <span>243</span><span> total points
+                        </span>
+                        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                    </li>
+                    <li class="collection-item avatar">
+                        <i class="material-icons circle">folder</i>
+                        <span class="title">Terry Wang</span>
+                        <p>71 average points<br>
+                            236 total points
+                        </p>
+                        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                    </li>
+                    <li class="collection-item avatar">
+                        <i class="material-icons circle green">insert_chart</i>
+                        <span class="title">Luca Adamo</span>
+                        <p>68 average points<br>
+                            219 total points
+                        </p>
+                        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                    </li>
+                    <li class="collection-item avatar">
+                        <i class="material-icons circle red">play_arrow</i>
+                        <span class="title">Jason Lee</span>
+                        <p>68 average points<br>
+                            218 total points
+                        </p>
+                        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                    </li>
+                    <li class="collection-item avatar">
+                        <i class="material-icons circle orange">airplay</i>
+                        <span class="title">Justin Lo</span>
+                        <p>65 average points<br>
+                            203 total points
+                        </p>
+                        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                    </li>
+                    <li class="collection-item avatar">
+                        <i class="material-icons circle purple">archive</i>
+                        <span class="title">Will Trojniak</span>
+                        <p>61 average points<br>
+                            187 total points
+                        </p>
+                        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                    </li>
+                    <li class="collection-item avatar">
+                        <i class="material-icons circle brown">art_track</i>
+                        <span class="title">Eric An</span>
+                        <p>60 average points<br>
+                            185 total points
+                        </p>
+                        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                    </li>
+
+                    </ul>
+            </div>
+            </div>
+        </div>
+        <div class="col s6 offset-s6">
+            <div class="card">
+                <ul class="collection with-header">
+                    <li class="collection-header"><h4>Class Announcements</h4></li>
+                    <li class="collection-item valign-wrapper"><b>January 27:</b>&nbsp;Review for quiz on HTML CSS and JavaScript next class</li>
+                    <li class="collection-item valign-wrapper"><b>January 29:</b>&nbsp;Criterion C Webpage due</li>          
+                </ul>
+
+            </div>
+
+        </div>
+    </div>
 
 </body>
 </html>
 
 <script>
+//Charts
+var ctx = document.getElementById('classChart').getContext('2d');
+var englishChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Jan 1', 'Jan 2', 'Jan 3', 'Jan 4', 'Jan 5', 'Jan 6'],
+        datasets: [{
+            label: 'Average Class Score',
+            data: [8, 4, 9, 6, 7, 7],
+            backgroundColor: [
+                'rgba(115, 201, 119, 0.5)',
+                'rgba(255, 99, 132, 0.5)',
+                'rgba(126, 224, 131, 0.5)',
+                'rgba(255, 206, 86, 0.5)',
+                'rgba(75, 192, 192, 0.5)',
+                'rgba(75, 192, 192, 0.5)'
+            ],
+            borderColor: [
+                'rgba(115, 201, 119, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(126, 224, 131, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(75, 192, 192, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        maintainAspectRatio: false
+    },
+    options: {
+        scales: {
+            yAxes: [{ 
+                ticks: {
+                    min: 0,
+                    max: 10
+                }
+            }]
+        }
+    },
+});
+
+
+
+
+
+//Not Charts
+
         // Your web app's Firebase configuration
         userId = "";
 
@@ -77,338 +231,11 @@
                 userId = user.uid; // you can also get .displayName, .photoURL, .email
                 name = user.displayName;
                 userImage = user.photoURL
-                //document.getElementById("uid").innerHTML = name; // display Google uid on page
+                document.getElementById("uid").innerHTML = name; // display Google uid on page
                 document.getElementById("upic").src = userImage;
                 document.getElementById("upicside").src = userImage;
 
                 
             } // end user null check
         }); // end check auth state
-
-        function signin() {
-            var provider = new firebase.auth.GoogleAuthProvider();
-            firebase.auth().signInWithRedirect(provider).then(function(result) { 
-                window.location.replace("fbtest.html");
-            });
-        };
-
-</script>
-
-<script src="path/to/chartjs/dist/Chart.js"></script>
-
-<script>
-
-//chart
-var ctx = document.getElementById('myChart').getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['Jan 1', 'Jan 2', 'Jan 3', 'Jan 4', 'Jan 5', 'Jan 6'],
-        datasets: [{
-            label: 'English Class Score',
-            data: [8, 4, 9, 6, 7, 7],
-            backgroundColor: [
-                'rgba(115, 201, 119, 0.5)',
-                'rgba(255, 99, 132, 0.5)',
-                'rgba(126, 224, 131, 0.5)',
-                'rgba(255, 206, 86, 0.5)',
-                'rgba(75, 192, 192, 0.5)',
-                'rgba(75, 192, 192, 0.5)'
-            ],
-            borderColor: [
-                'rgba(115, 201, 119, 1)',
-                'rgba(255, 99, 132, 1)',
-                'rgba(126, 224, 131, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(75, 192, 192, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-
-    options: { 
-        scales: {
-            yAxes: [{ 
-                ticks: {
-                    min: 0
-                }
-            }]
-        }
-    },
-});
-
-var ctx = document.getElementById('myChart2').getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['Jan 1', 'Jan 2', 'Jan 3', 'Jan 4', 'Jan 5', 'Jan 6'],
-        datasets: [{
-            label: 'French Class Score',
-            data: [8, 4, 9, 6, 7, 7],
-            backgroundColor: [
-                'rgba(115, 201, 119, 0.5)',
-                'rgba(255, 99, 132, 0.5)',
-                'rgba(126, 224, 131, 0.5)',
-                'rgba(255, 206, 86, 0.5)',
-                'rgba(75, 192, 192, 0.5)',
-                'rgba(75, 192, 192, 0.5)'
-            ],
-            borderColor: [
-                'rgba(115, 201, 119, 1)',
-                'rgba(255, 99, 132, 1)',
-                'rgba(126, 224, 131, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(75, 192, 192, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-
-    options: { 
-        scales: {
-            yAxes: [{ 
-                ticks: {
-                    min: 0
-                }
-            }]
-        }
-    },
-});
-
-var ctx = document.getElementById('myChart3').getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['Jan 1', 'Jan 2', 'Jan 3', 'Jan 4', 'Jan 5', 'Jan 6'],
-        datasets: [{
-            label: 'Math Class Score',
-            data: [8, 4, 9, 6, 7, 7],
-            backgroundColor: [
-                'rgba(115, 201, 119, 0.5)',
-                'rgba(255, 99, 132, 0.5)',
-                'rgba(126, 224, 131, 0.5)',
-                'rgba(255, 206, 86, 0.5)',
-                'rgba(75, 192, 192, 0.5)',
-                'rgba(75, 192, 192, 0.5)'
-            ],
-            borderColor: [
-                'rgba(115, 201, 119, 1)',
-                'rgba(255, 99, 132, 1)',
-                'rgba(126, 224, 131, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(75, 192, 192, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-
-    options: { 
-        scales: {
-            yAxes: [{ 
-                ticks: {
-                    min: 0
-                }
-            }]
-        }
-    },
-});
-
-var ctx = document.getElementById('myChart4').getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['Jan 1', 'Jan 2', 'Jan 3', 'Jan 4', 'Jan 5', 'Jan 6'],
-        datasets: [{
-            label: 'Chemistry Class Score',
-            data: [8, 4, 9, 6, 7, 7],
-            backgroundColor: [
-                'rgba(115, 201, 119, 0.5)',
-                'rgba(255, 99, 132, 0.5)',
-                'rgba(126, 224, 131, 0.5)',
-                'rgba(255, 206, 86, 0.5)',
-                'rgba(75, 192, 192, 0.5)',
-                'rgba(75, 192, 192, 0.5)'
-            ],
-            borderColor: [
-                'rgba(115, 201, 119, 1)',
-                'rgba(255, 99, 132, 1)',
-                'rgba(126, 224, 131, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(75, 192, 192, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-
-    options: { 
-        scales: {
-            yAxes: [{ 
-                ticks: {
-                    min: 0
-                }
-            }]
-        }
-    },
-});
-
-var ctx = document.getElementById('myChart5').getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['Jan 1', 'Jan 2', 'Jan 3', 'Jan 4', 'Jan 5', 'Jan 6'],
-        datasets: [{
-            label: 'Physics Class Score',
-            data: [8, 4, 9, 6, 7, 7],
-            backgroundColor: [
-                'rgba(115, 201, 119, 0.5)',
-                'rgba(255, 99, 132, 0.5)',
-                'rgba(126, 224, 131, 0.5)',
-                'rgba(255, 206, 86, 0.5)',
-                'rgba(75, 192, 192, 0.5)',
-                'rgba(75, 192, 192, 0.5)'
-            ],
-            borderColor: [
-                'rgba(115, 201, 119, 1)',
-                'rgba(255, 99, 132, 1)',
-                'rgba(126, 224, 131, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(75, 192, 192, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-
-    options: { 
-        scales: {
-            yAxes: [{ 
-                ticks: {
-                    min: 0
-                }
-            }]
-        }
-    },
-});
-
-var ctx = document.getElementById('myChart6').getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['Jan 1', 'Jan 2', 'Jan 3', 'Jan 4', 'Jan 5', 'Jan 6'],
-        datasets: [{
-            label: 'Coding Class Score',
-            data: [8, 4, 9, 6, 7, 7],
-            backgroundColor: [
-                'rgba(115, 201, 119, 0.5)',
-                'rgba(255, 99, 132, 0.5)',
-                'rgba(126, 224, 131, 0.5)',
-                'rgba(255, 206, 86, 0.5)',
-                'rgba(75, 192, 192, 0.5)',
-                'rgba(75, 192, 192, 0.5)'
-            ],
-            borderColor: [
-                'rgba(115, 201, 119, 1)',
-                'rgba(255, 99, 132, 1)',
-                'rgba(126, 224, 131, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(75, 192, 192, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-
-    options: { 
-        scales: {
-            yAxes: [{ 
-                ticks: {
-                    min: 0
-                }
-            }]
-        }
-    },
-});
-
-var ctx = document.getElementById('myChart7').getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['Jan 1', 'Jan 2', 'Jan 3', 'Jan 4', 'Jan 5', 'Jan 6'],
-        datasets: [{
-            label: 'Gym Class Score',
-            data: [8, 4, 9, 6, 7, 7],
-            backgroundColor: [
-                'rgba(115, 201, 119, 0.5)',
-                'rgba(255, 99, 132, 0.5)',
-                'rgba(126, 224, 131, 0.5)',
-                'rgba(255, 206, 86, 0.5)',
-                'rgba(75, 192, 192, 0.5)',
-                'rgba(75, 192, 192, 0.5)'
-            ],
-            borderColor: [
-                'rgba(115, 201, 119, 1)',
-                'rgba(255, 99, 132, 1)',
-                'rgba(126, 224, 131, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(75, 192, 192, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-
-    options: { 
-        scales: {
-            yAxes: [{ 
-                ticks: {
-                    min: 0
-                }
-            }]
-        }
-    },
-});
-
-var ctx = document.getElementById('myChart8').getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['Jan 1', 'Jan 2', 'Jan 3', 'Jan 4', 'Jan 5', 'Jan 6'],
-        datasets: [{
-            label: 'History Class Score',
-            data: [8, 4, 9, 6, 7, 7],
-            backgroundColor: [
-                'rgba(115, 201, 119, 0.5)',
-                'rgba(255, 99, 132, 0.5)',
-                'rgba(126, 224, 131, 0.5)',
-                'rgba(255, 206, 86, 0.5)',
-                'rgba(75, 192, 192, 0.5)',
-                'rgba(75, 192, 192, 0.5)'
-            ],
-            borderColor: [
-                'rgba(115, 201, 119, 1)',
-                'rgba(255, 99, 132, 1)',
-                'rgba(126, 224, 131, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(75, 192, 192, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-
-    options: { 
-        scales: {
-            yAxes: [{ 
-                ticks: {
-                    min: 0
-                }
-            }]
-        }
-    },
-});
-
 </script>
