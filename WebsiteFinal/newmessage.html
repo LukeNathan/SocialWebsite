@@ -24,9 +24,9 @@
             <div class="nav-wrapper">
             <a href="#" class="brand-logo right"><img id="upic" height=55 width=55 class="circle"></img></a>
             <ul class="left hide-on-med-and-down">
-                <li class="active"><a href="index.html">Home</a></li>
+                <li><a href="index.html">Home</a></li>
                 <li><a href="classes.html">Classes</a></li>
-                <li><a href="newmessage.html">Messages</a></li>
+                <li class="active"><a href="newmessage.html">Messages</a></li>
                 <li><a href="notifs.html">Notifications</a></li>
             </ul>
             </div>
@@ -99,7 +99,7 @@
                         </form>
                 </div>
             </form>
-            <button class="btn waves-effect waves-light" type="submit" name="action" onclick="pushData()">Submit
+            <button class="btn waves-effect waves-light" onclick="pushData()">Submit
                 <i class="material-icons right">send</i>
             </button>
             <button class="btn waves-effect waves-light" type="submit" name="action" onclick="removeData()">Remove data</button>
@@ -136,7 +136,6 @@
                 userId = user.uid; // you can also get .displayName, .photoURL, .email
                 name = user.displayName;
                 userImage = user.photoURL
-                document.getElementById("uid").innerHTML = name; // display Google uid on page
                 document.getElementById("upic").src = userImage;
 
                 
@@ -169,7 +168,6 @@
          
         // HERE IS THE FUNCTION TO SHOW HOW TO PUSH/ADD NEW USER DATA TO EXISTING DATABASE
         function pushData() {
-            var userId = document.getElementById("uid").innerHTML;
             var tweet = document.getElementById("tweet").value;
             var js_time = Date.now();
             var tweetid = firebase.database().ref('tweets/' + userId + "/").push({tweet: tweet, time: js_time});
