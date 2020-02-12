@@ -18,7 +18,7 @@
 
     </head>
 
-    <body>
+    <body onload="getData()">
 
     <nav>
             <div class="nav-wrapper">
@@ -145,7 +145,7 @@
         
        // HERE IS THE FUNCTION TO SHOW HOW TO GET USER DATA
        function getData() {
-            var userId = document.getElementById("uid").innerHTML;
+            //var userId = document.getElementById("uid").innerHTML;
                 firebase.database().ref('/tweets/' + userId).once('value', function(snapshot) {
                 var data = snapshot.val();
                 var i;
