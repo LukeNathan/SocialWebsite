@@ -298,7 +298,7 @@
                 userImage = user.photoURL
                 userEmail = user.email
                 document.getElementById("upic").src = userImage;
-                firebase.database().ref('/users/' + userId).set({uid: userId, name: username, email: userEmail, img: userImage});
+                firebase.database().ref('/users/' + username).set({uid: userId, name: username, email: userEmail, img: userImage});
             } // end user null check
         }); // end check auth state
 
