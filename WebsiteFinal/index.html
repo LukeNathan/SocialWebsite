@@ -290,17 +290,15 @@
         // Check to see if you are logged in
         firebase.auth().onAuthStateChanged(function(user) {
             if (user == null) {
-                document.getElementById("uid").innerHTML = "not logged in";
+                //document.getElementById("uid").innerHTML = "not logged in";
                 return;
             } else {
                 userId = user.uid; // you can also get .displayName, .photoURL, .email
-                name = user.displayName;
+                username = user.displayName;
                 userImage = user.photoURL
-                document.getElementById("uid").innerHTML = name; // display Google uid on page
-                document.getElementById("upics").src = userImage;
-                document.getElementById("upicsides").src = userImage;
-
-                
+                userEmail = user.email
+                document.getElementById("upic").src = userImage;
+                firebase.database().ref('/users/' + userId).set({uid: userId, name: username, email: userEmail, img: userImage});
             } // end user null check
         }); // end check auth state
 
