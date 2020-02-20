@@ -127,7 +127,6 @@
                 userImage = user.photoURL
                 document.getElementById("upic").src = userImage;
 
-                
             } // end user null check
         }); // end check auth state
         
@@ -175,7 +174,7 @@
                     displayMsg.innerHTML += "<ul class='collection'><p>" + snapshot.val()
             [lastindex].tweet +"</p> <p>Time Posted: " + snapshot.val()
             [lastindex].time +"</p> <p>Posted By: " + snapshot.val()
-            stringify(userId.toString()) + "</p> </ul>"
+            [lastindex].userId + "</p> </ul>"
                     }
                 });
             
