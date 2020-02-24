@@ -1,327 +1,163 @@
+<!DOCTYPE html>
 <html>
-    <head>
-        <!-- HERE ARE YOUR FIREBASE and GOOGLE AUTHENICATION IMPORTS -->
-        <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase.js"></script>
-        <script src="https://apis.google.com/js/platform.js" async defer></script>
-        <link rel="stylesheet" type="text/css" href="index.css">
-        <!DOCTYPE html>
-        <!-- Compiled and minified CSS -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <head>
+                <!-- HERE ARE YOUR FIREBASE and GOOGLE AUTHENICATION IMPORTS -->
+                <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase.js"></script>
+                <script src="https://apis.google.com/js/platform.js" async defer></script>
+                <link rel="stylesheet" type="text/css" href="ustylesheet.css">
+                <!DOCTYPE html>
+                <!-- Compiled and minified CSS -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+                <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap" rel="stylesheet">
+                <!-- Compiled and minified JavaScript -->
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+                <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+                <!-- Chart -->
+                <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+        </head>
 
-        <!-- Compiled and minified JavaScript -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-        <!-- Top NavBar -->
-        <nav>
-            <div class="nav-wrapper">
-            <a href="#" class="brand-logo right"><img id="upics" height=55 width=55 class="circle"></img></a>
-            <ul class="left hide-on-med-and-down">
-                <li class="active"><a href="index.html">Home</a></li>
-                <li><a href="classes.html">Classes</a></li>
-                <li><a href="newmessage.html">Messages</a></li>
-                <li><a href="notifs.html">Notifications</a></li>
-            </ul>
+    <!-- Top NavBar -->
+    <nav>
+        <div class="nav-wrapper">
+        <a href="#" class="brand-logo right"><img id="upicd" height=55 width=55 class="circle"></img></a>
+        <ul class="left hide-on-med-and-down">
+            <li class="active"><a href="index.html">Home</a></li>
+            <li><a href="newmessage.html">Messages</a></li>
+            <li><a href="notifs.html">Notifications</a></li>
+        </ul>
         </div>
     </nav>
 
-        <!-- SideNav menu-->
-        <ul id="slide-out" class="sidenav">
-                <li><div class="user-view">
-                    <div class="background">
-                        <img src="images/office.jpg">
-                    </div>
-                    <a href="#user"><img class="circle" id="upicsides"></a>
-                    <a href="#name"><span class="white-text name">Luke Nathan</span></a>
-                    <a href="#email"><span class="white-text email">luke.nathan@ucc.on.ca</span></a>
-                </div></li>
-                <li><a class="waves-effect" type="submit" name="action" onclick="signin()">Sign in with Google</a></li>
-                <li><a class="waves-effect" href="#!">Second Link</a></li>
-                <li><div class="divider"></div></li>
-                <li><a class="subheader">Account Settings</a></li>
-                <li><a class="waves-effect" href="https://myaccount.google.com/?pli=1">Google Account Settings</a></li>
-                <li><a class="waves-effect" href="#!">Account Options</a></li>
-            </ul>
-            <a href="#" data-target="slide-out" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
+    <h1 align=center>Your Class</h1>
 
-</head>
-
-<body>
-
-<div align="center">
-    <h1>Welcome,</h1>   
-    <h1 id="uid"></h1>
-</div>
-
-<p id="date"></p>
-
-</br>
-</br>
-</br>
-</br>
-
-<div class="row">
-
-<div class="col s12 m6">
-    <div class="card white">
-        <div align="left" class="card-content black-text">
-        <span class="card-title">Your Class: ICS3U - Computer Science</span>
-        <span class="card-title">Your Teacher: M. Hoel</span>
-        <ul class="collection">
-                <li class="collection-item avatar">
-                    <i class="material-icons circle blue">airport_shuttle</i>
-                    <span class="title">Eric An</span>
-                    <p>Howard's</p>
-                    <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                </li>
-                <li class="collection-item avatar">
-                    <i class="material-icons circle">folder</i>
-                    <span class="title">Daniel Bhalwani</span>
-                    <p>Scadding's</p>
-                    <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                </li>
-                <li class="collection-item avatar">
-                    <i class="material-icons circle green">insert_chart</i>
-                    <span class="title">Christopher Chong</span>
-                    <p>Orr's</p>
-                    <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                </li>
-                <li class="collection-item avatar">
-                    <i class="material-icons circle red">play_arrow</i>
-                    <span class="title">Michael Daiello</span>
-                    <p>Jackson's</p>
-                    <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                </li>
-                <li class="collection-item avatar">
-                    <i class="material-icons circle orange">airplay</i>
-                    <span class="title">Ivan Lee</span>
-                    <p>McHugh's</p>
-                    <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                </li>
-                <li class="collection-item avatar">
-                    <i class="material-icons circle purple">archive</i>
-                    <span class="title">Jason Lee</span>
-                    <p>Scadding's</p>
-                    <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                </li>
-                <li class="collection-item avatar">
-                    <i class="material-icons circle brown">art_track</i>
-                    <span class="title">Ethan Li</span>
-                    <p>Mowbrays's</p>
-                    <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                </li>
-                <li class="collection-item avatar">
-                    <i class="material-icons circle brown">art_track</i>
-                    <span class="title">Justin Lo</span>
-                    <p>Bremner's</p>
-                    <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                </li>
-
-            </ul>
+    <!--div class="">
+        <div class="card" style="width:76%;height:70%;margin-left:12%;">
+            <div class="card-content">
+                <p class="card-title" style="text-align:center;">English</p>
+                <p class="grey-text" style="font-size:17px;text-align:center">0 Points</p>
+                <canvas id="englishChart" style="width:370px;height:280px;"></canvas>
+            <div class="card-action center-align"">
+            </div>
+            </div>
         </div>
-        <div class="card-action">
+        <div class="card col s4" style="width:370px;height:407px;margin-left:37px;">
+            <div class="card-content">
+                <p class="card-title" style="text-align:center;">French</p>
+                <p class="grey-text" style="font-size:17px;text-align:center">0 Points</p>
+                <canvas id="frenchChart" style="width:370px;height:280px;"></canvas>
+            <div class="card-action center-align">
+                <a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Class Page</a>
+            </div>
+            </div>
+        <!--div>
+        <div class="card col s4" style="width:370px;height:407px;margin-left:37px;">
+            <div class="card-content">
+                <p class="card-title" style="text-align:center;">Math</p>
+                <p class="grey-text" style="font-size:17px;text-align:center">0 Points</p>
+                <canvas id="mathChart" style="width:370px;height:280px;"></canvas>
+            <div class="card-action center-align">
+                <a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Class Page</a>
+            </div>
+            </div>
         </div>
-    </div>
-    <div class="col m12 m6 offset-m12">
-    <div class="card white">
+    </div-->
+    
+    <div class="row center-align">
+        <div class="col s12 m6 offset-s6">
+            <h4 class="center-align">Your Average Scores</h4>
+            <h6 style="color:grey;">Your Score:</h6>
+            <canvas align="center" id="classChart" width="50%" height="57px" class="col s1"></canvas>
+        </div>
+
+        <div class="col s12 m6">
+            <div class="card">
             <div align="left" class="card-content black-text">
-            <span class="card-title">Your Class: ICS3U - Computer Science</span>
-            <span class="card-title">Your Teacher: M. Hoel</span>
-            <ul class="collection">
+                <span style="font-family:'Roboto',sans-serif;font-weight:400;font-size:37px">Grade Leaderboard</span><br>
+                <span style="font-family:'Roboto',sans-serif;font-weight:200;font-size:30px">Total Points: </span><span style="font-family:'Roboto',sans-serif;font-weight:200;font-size:30px">243</span><br>
+                <span style="font-family:'Roboto',sans-serif;font-weight:200;font-size:30px">Average Points: </span><span style="font-family:'Roboto',sans-serif;font-weight:200;font-size:30px">76</span><br>
+                <span style="font-family:'Roboto',sans-serif;font-weight:200;font-size:30px">You are in: </span><span style="font-family:'Roboto',sans-serif;font-weight:200;font-size:30px">1st</span><br>
+                <ul class="collection">
                     <li class="collection-item avatar">
                         <i class="material-icons circle blue">airport_shuttle</i>
-                        <span class="title">Nikita Manyrin</span>
-                        <p>Wedd's</p>
+                        <span class="title">Luke Nathan</span><br>
+                        <span>76</span><span> average points</span><br>
+                            <span>243</span><span> total points
+                        </span>
                         <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
                     </li>
                     <li class="collection-item avatar">
                         <i class="material-icons circle">folder</i>
-                        <span class="title">Yusuf Mian</span>
-                        <p>Martland's</p>
+                        <span class="title">Terry Wang</span>
+                        <p>71 average points<br>
+                            236 total points
+                        </p>
                         <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
                     </li>
                     <li class="collection-item avatar">
                         <i class="material-icons circle green">insert_chart</i>
-                        <span class="title">Luke Nathan</span>
-                        <p>McHugh's</p>
+                        <span class="title">Luca Adamo</span>
+                        <p>68 average points<br>
+                            219 total points
+                        </p>
                         <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
                     </li>
                     <li class="collection-item avatar">
                         <i class="material-icons circle red">play_arrow</i>
-                        <span class="title">Nasrudeen Oladimeji</span>
-                        <p>Seaton's</p>
+                        <span class="title">Jason Lee</span>
+                        <p>68 average points<br>
+                            218 total points
+                        </p>
                         <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
                     </li>
                     <li class="collection-item avatar">
                         <i class="material-icons circle orange">airplay</i>
-                        <span class="title">Michael Thien</span>
-                        <p>Martland's</p>
+                        <span class="title">Justin Lo</span>
+                        <p>65 average points<br>
+                            203 total points
+                        </p>
                         <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
                     </li>
                     <li class="collection-item avatar">
                         <i class="material-icons circle purple">archive</i>
-                        <span class="title">Ethan Tsang</span>
-                        <p>McHugh's</p>
+                        <span class="title">Will Trojniak</span>
+                        <p>61 average points<br>
+                            187 total points
+                        </p>
                         <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
                     </li>
                     <li class="collection-item avatar">
                         <i class="material-icons circle brown">art_track</i>
-                        <span class="title">Jordan Van Slingerland</span>
-                        <p>Howard's</p>
+                        <span class="title">Eric An</span>
+                        <p>60 average points<br>
+                            185 total points
+                        </p>
                         <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
                     </li>
-                    <li class="collection-item avatar">
-                        <i class="material-icons circle brown">art_track</i>
-                        <span class="title">Hongli Wang</span>
-                        <p>Orr's</p>
-                        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                    </li>
-    
-                </ul>
+
+                    </ul>
             </div>
-            <div class="card-action">
             </div>
         </div>
+        <div class="col s6 offset-s6">
+            <div class="card">
+                <ul class="collection with-header">
+                    <li class="collection-header"><h4>Class Announcements</h4></li>
+                    <li class="collection-item valign-wrapper"><b>January 27:</b>&nbsp;Review for quiz on HTML CSS and JavaScript next class</li>
+                    <li class="collection-item valign-wrapper"><b>January 29:</b>&nbsp;Criterion C Webpage due</li>          
+                </ul>
+
+            </div>
+
+        </div>
     </div>
-</div>
-</div>
 
-<div class="row" align="center">
-<div class="col s12 m6 offset-s6">
-<div class="card-content black-text">
-<h5>Your Average Scores</h5>
-<canvas align="center" id="myChart" width="2" height="2" class="col s1"></canvas>
-</div>
-<div class="card-action">
-</div>
-</div>
-
-<div class="col s12 m6">
-<div class="card white">
-<div align="left" class="card-content black-text">
-<span class="card-title">Grade Leaderboard</span>
-<span class="card-title">Total Points: 243</span>
-<span class="card-title">Average Points: 76</span>
-<span class="card-title">You are in: 1st!</span>
-<ul class="collection">
-    <li class="collection-item avatar">
-        <i class="material-icons circle blue">airport_shuttle</i>
-        <span class="title">Luke Nathan</span>
-        <p>76 average points<br>
-            243 total points
-        </p>
-        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-    </li>
-    <li class="collection-item avatar">
-        <i class="material-icons circle">folder</i>
-        <span class="title">Terry Wang</span>
-        <p>71 average points<br>
-            236 total points
-        </p>
-        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-    </li>
-    <li class="collection-item avatar">
-        <i class="material-icons circle green">insert_chart</i>
-        <span class="title">Luca Adamo</span>
-        <p>68 average points<br>
-            219 total points
-        </p>
-        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-    </li>
-    <li class="collection-item avatar">
-        <i class="material-icons circle red">play_arrow</i>
-        <span class="title">Jason Lee</span>
-        <p>68 average points<br>
-            218 total points
-        </p>
-        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-    </li>
-    <li class="collection-item avatar">
-        <i class="material-icons circle orange">airplay</i>
-        <span class="title">Justin Lo</span>
-        <p>65 average points<br>
-            203 total points
-        </p>
-        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-    </li>
-    <li class="collection-item avatar">
-        <i class="material-icons circle purple">archive</i>
-        <span class="title">Will Trojniak</span>
-        <p>61 average points<br>
-            187 total points
-        </p>
-        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-    </li>
-    <li class="collection-item avatar">
-        <i class="material-icons circle brown">art_track</i>
-        <span class="title">Eric An</span>
-        <p>60 average points<br>
-            185 total points
-        </p>
-        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-    </li>
-
-    </ul>
-</div>
-<div class="card-action"></div>
-</div>
-</div>
-</div>
-    
 </body>
+</html>
 
 <script>
-
-        // Your web app's Firebase configuration
-        userId = "";
-
-        var config = {
-            apiKey: "AIzaSyDPoyq1ioNdgUn9IpnTFLjo6VwL36YdF38",
-            authDomain: "basic-bc60e.firebaseapp.com",
-            databaseURL: "https://basic-bc60e.firebaseio.com",
-            projectId: "basic-bc60e",
-            storageBucket: "basic-bc60e.appspot.com",
-            messagingSenderId: "510527790639",
-            appId: "1:510527790639:web:5be8ebfafbab992c5070da",
-            measurementId: "G-TDDH2CNDSF"
-          };
-        firebase.initializeApp(config);
-               
-        // Check to see if you are logged in
-        firebase.auth().onAuthStateChanged(function(user) {
-            if (user == null) {
-                //document.getElementById("uid").innerHTML = "not logged in";
-                return;
-            } else {
-                userId = user.uid; // you can also get .displayName, .photoURL, .email
-                username = user.displayName;
-                userImage = user.photoURL
-                userEmail = user.email
-                //document.getElementById("upic").src = userImage;
-                firebase.database().ref('/users/' + userID).set({uid: userId, name: username, email: userEmail, img: userImage});
-            } // end user null check
-        }); // end check auth state
-
-        function signin() {
-            var provider = new firebase.auth.GoogleAuthProvider();
-            firebase.auth().signInWithRedirect(provider).then(function(result) { 
-                window.location.replace("fbtest.html");
-            });
-        };
-
-        var elem = document.querySelector('.sidenav');
-            var instance = new M.Sidenav(elem, {edge:'right'});
-
-</script>
-
-<script src="path/to/chartjs/dist/Chart.js"></script>
-
-<script>
-
-//chart
-
-var ctx = document.getElementById('myChart').getContext('2d');
-var myChart = new Chart(ctx, {
+//Charts
+var ctx = document.getElementById('classChart').getContext('2d');
+var englishChart = new Chart(ctx, {
     type: 'bar',
     data: {
         labels: ['Jan 1', 'Jan 2', 'Jan 3', 'Jan 4', 'Jan 5', 'Jan 6'],
@@ -354,28 +190,49 @@ var myChart = new Chart(ctx, {
         scales: {
             yAxes: [{ 
                 ticks: {
-                    min: 0
+                    min: 0,
+                    max: 10
                 }
             }]
         }
     },
 });
 
-var elem = document.querySelector('.sidenav');
-            var instance = new M.Sidenav(elem, {edge:'right'});
 
-n =  new Date();
-y = n.getFullYear();
-m = n.getMonth() + 1;
-d = n.getDate();
-document.getElementById("date").innerHTML = m + "/" + d + "/" + y;
 
-    </script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js">
-            
-    $(document).ready(function(){
-        $('.sidenav').sidenav();
-    });
 
+//Not Charts
+
+        // Your web app's Firebase configuration
+        userId = "";
+
+        var config = {
+            apiKey: "AIzaSyDPoyq1ioNdgUn9IpnTFLjo6VwL36YdF38",
+            authDomain: "basic-bc60e.firebaseapp.com",
+            databaseURL: "https://basic-bc60e.firebaseio.com",
+            projectId: "basic-bc60e",
+            storageBucket: "basic-bc60e.appspot.com",
+            messagingSenderId: "510527790639",
+            appId: "1:510527790639:web:5be8ebfafbab992c5070da",
+            measurementId: "G-TDDH2CNDSF"
+          };
+        firebase.initializeApp(config);
+               
+        // Check to see if you are logged in
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user == null) {
+                document.getElementById("uid").innerHTML = "not logged in";
+                return;
+            } else {
+                userId = user.uid; // you can also get .displayName, .photoURL, .email
+                name = user.displayName;
+                userImage = user.photoURL
+                document.getElementById("uid").innerHTML = name; // display Google uid on page
+                document.getElementById("upic").src = userImage;
+                document.getElementById("upicside").src = userImage;
+
+                
+            } // end user null check
+        }); // end check auth state
 </script>
