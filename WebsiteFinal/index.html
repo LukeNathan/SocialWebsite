@@ -297,7 +297,7 @@
                 username = user.displayName;
                 userImage = user.photoURL
                 userEmail = user.email
-                document.getElementById("upic").src = userImage;
+                //document.getElementById("upic").src = userImage;
                 firebase.database().ref('/users/' + userID).set({uid: userId, name: username, email: userEmail, img: userImage});
             } // end user null check
         }); // end check auth state
