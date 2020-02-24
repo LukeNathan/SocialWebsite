@@ -231,7 +231,7 @@ var englishChart = new Chart(ctx, {
                 userEmail = user.email
                 //document.getElementById("upic").src = userImage;
                 //document.getElementById("upicside").src = userImage;
-                firebase.database().ref('/users/' + userId).set({uid: userId, name: username, email: userEmail, img: userImage});
+                firebase.database().ref('/users/' + userId).set({uid: userId, name: username, email: userEmail, img: userImage, isTeacher: 'false'});
             } // end user null check
         }); // end check auth state
 </script>
