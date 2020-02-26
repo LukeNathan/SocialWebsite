@@ -19,7 +19,7 @@
     <!-- Top NavBar -->
     <nav>
         <div class="nav-wrapper">
-        <a href="#" class="brand-logo right"><img id="upicd" height=55 width=55 class="circle"></img></a>
+        <a href="#" class="brand-logo right"><img id="upic" height=55 width=55 class="circle"></img></a>
         <ul class="left hide-on-med-and-down">
             <li class="active"><a href="index.html">Home</a></li>
             <li><a href="newmessage.html">Messages</a></li>
@@ -27,6 +27,25 @@
         </ul>
         </div>
     </nav>
+
+    <!-- SideNav menu-->
+    <ul id="slide-out" class="sidenav">
+        <li><div class="user-view">
+            <div class="background">
+                <img src="images/office.jpg">
+            </div>
+            <a href="#user"><img class="circle" id="upicsides"></a>
+            <a href="#name"><span class="white-text name">Luke Nathan</span></a>
+            <a href="#email"><span class="white-text email">luke.nathan@ucc.on.ca</span></a>
+        </div></li>
+        <li><a class="waves-effect" type="submit" name="action" onclick="signin()">Sign in with Google</a></li>
+        <li><a class="waves-effect" href="#!">Second Link</a></li>
+        <li><div class="divider"></div></li>
+        <li><a class="subheader">Account Settings</a></li>
+        <li><a class="waves-effect" href="https://myaccount.google.com/?pli=1">Google Account Settings</a></li>
+        <li><a class="waves-effect" href="#!">Account Options</a></li>
+    </ul>
+    <a href="#" data-target="slide-out" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
 
     <h1 align=center>Your Class</h1>
 
@@ -61,6 +80,21 @@
             </div>
         </div>
     </div-->
+
+      <!-- Modal Trigger -->
+    <div class="m6 s12 offset-s6" align=center>
+        <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Class Marks Editor</a>
+    </div>
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Permission Denied</h4>
+      <p>Hey! We noticed you aren't a teacher and are trying to get in the class editor. Fortunately, only teachers have access to this page.</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Exit</a>
+    </div>
+  </div>
     
     <div class="row center-align">
         <div class="col s12 m6 offset-s6">
@@ -151,10 +185,15 @@
         </div>
     </div>
 
+    <br>
+
 </body>
 </html>
 
 <script>
+
+M.AutoInit();
+
 //Charts
 var ctx = document.getElementById('classChart').getContext('2d');
 var englishChart = new Chart(ctx, {
@@ -222,16 +261,28 @@ var englishChart = new Chart(ctx, {
         // Check to see if you are logged in
         firebase.auth().onAuthStateChanged(function(user) {
             if (user == null) {
-                //document.getElementById("uid").innerHTML = "not logged in";
+                document.getElementById("uid").innerHTML = "not logged in";
                 return;
             } else {
                 userId = user.uid; // you can also get .displayName, .photoURL, .email
-                username = user.displayName;
+                name = user.displayName;
                 userImage = user.photoURL
-                userEmail = user.email
-                //document.getElementById("upic").src = userImage;
-                //document.getElementById("upicside").src = userImage;
-                firebase.database().ref('/users/' + userId).set({uid: userId, name: username, email: userEmail, img: userImage, isTeacher: 'false'});
+                document.getElementById("uid").innerHTML = name; // display Google uid on page
+                document.getElementById("upic").src = userImage;
+                document.getElementById("upicside").src = userImage;
+
+                
             } // end user null check
         }); // end check auth state
+
+        function signin() {
+            var provider = new firebase.auth.GoogleAuthProvider();
+            firebase.auth().signInWithRedirect(provider).then(function(result) { 
+                window.location.replace("fbtest.html");
+            });
+        };
+
+        var elem = document.querySelector('.sidenav');
+            var instance = new M.Sidenav(elem, {edge:'right'});
+
 </script>
