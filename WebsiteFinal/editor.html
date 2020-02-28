@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- HERE ARE YOUR FIREBASE and GOOGLE AUTHENICATION IMPORTS -->
+        <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase.js"></script>
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+        <link rel="stylesheet" type="text/css" href="ustylesheet.css">
+        <!DOCTYPE html>
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap" rel="stylesheet">
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!-- Chart -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+        <!-- Slider -->
+        <link rel="stylesheet" type="text/css" href="nouislider.css">
+        <script src="nouislider.js"></script>
+</head>
+
+
+<!-- Top NavBar -->
+<nav>
+<div class="nav-wrapper">
+<a href="#" class="brand-logo right"><img id="upics" height=55 width=55 class="circle"></img></a>
+<ul class="left hide-on-med-and-down">
+    <li class="active"><a href="index.html">Home</a></li>
+    <li><a href="classes.html">Classes</a></li>
+    <li><a href="newmessage.html">Messages</a></li>
+    <li><a href="notifs.html">Notifications</a></li>
+</ul>
+</div>
+</nav>
+
+
+<br>
+<div class="input-field container">
+<select id="selections" class="browser-default">
+  <!--<option value="" disabled selected>Select Student</option>-->
+  <!--<option value="1">Luke Nathan</option>
+  <option value="2">Terry Wang</option>
+  <option value="3">El</option>-->
+</select>
+</div>
+
+<div class="container">
+    <div style="margin-top:77px"></div>
+    <label style="font-size: 17px;">Number of Points</label>
+    <div id="pointSlider" style="margin:7px 0px 47px 0px"></div>
+    <div class="center-align">
+        <button class="btn-large waves-effect waves-light" type="submit" name="action">Submit
+            <i class="material-icons right">check</i>
+        </button>
+    </div>
+</div>
+
+
+
+<!--div class="container">
+<div class="input-field">
+    <input placeholder="Enter Value" id="entryinput" type="text" class="validate">
+    <label for="entryinput">Score Change</label>
+</div>
+</div-->
+
+</body>
+
+
+<script>
+
+
+        // Your web app's Firebase configuration
+        userId = "";
+
+        var config = {
+            apiKey: "AIzaSyDPoyq1ioNdgUn9IpnTFLjo6VwL36YdF38",
+            authDomain: "basic-bc60e.firebaseapp.com",
+            databaseURL: "https://basic-bc60e.firebaseio.com",
+            projectId: "basic-bc60e",
+            storageBucket: "basic-bc60e.appspot.com",
+            messagingSenderId: "510527790639",
+            appId: "1:510527790639:web:5be8ebfafbab992c5070da",
+            measurementId: "G-TDDH2CNDSF"
+          };
+        firebase.initializeApp(config);
+               
+        // Check to see if you are logged in
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user == null) {
+                //document.getElementById("uid").innerHTML = "not logged in";
+                return;
+            } else {
+                userId = user.uid; // you can also get .displayName, .photoURL, .email
+                username = user.displayName;
+                userImage = user.photoURL
+                userEmail = user.email
+                //document.getElementById("upic").src = userImage;
+                //document.getElementById("upicside").src = userImage;
+                //firebase.database().ref('/users/' + userId).set({uid: userId, name: username, email: userEmail, img: userImage, isTeacher: 'false'});
+                showStudents();
+           
+            } // end user null check
+        }); // end check auth state
+
+//Materialize
+    var slider = document.getElementById('pointSlider');
+    noUiSlider.create(slider, {
+        start: 1,
+        connect: 'lower',
+        step: 1,
+        orientation: 'horizontal',
+        range: {
+            'min': 1,
+            'max': 10
+        },
+            format: wNumb({
+                decimals: 1
+        }),
+    });
+        
+
+
+
+
+
+
+//Functions
+
+    function showStudents() {
+
+        mSelections = document.getElementById("selections");
+
+        firebase.database().ref('/users').once('value',function(snapshot) {
+            data = snapshot.val();
+            values = Object.values(data);
+            for(i = 0; i < values.length; i++){
+                mSelections.innerHTML += "<option>" + values[i].name + " | " + values[i].email + "</option>";
+            }
+        });
+        
+    }
+
+    function makeAnnouncement() {
+            var mAnnouncement = document.getElementById("");
+            var js_time = Date.now();
+            sfirebase.database().ref('tweets/' + userId + "/").push({time: js_time});
+    
+    }
+
+    function yyyymmdd() {
+        var now = new Date();
+        var y = now.getFullYear();
+        var m = now.getMonth() + 1;
+        var d = now.getDate();
+        var mm = m < 10 ? '0' + m : m;
+        var dd = d < 10 ? '0' + d : d;
+        var fullDate = y + mm + dd;
+        console.log(fullDate)
+        return '' + y + mm + dd;
+}
+
+
+
+
+
+</script>
+
+</html>
