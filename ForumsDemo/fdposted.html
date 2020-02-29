@@ -1,0 +1,149 @@
+<html>
+    <head>
+        <!-- HERE ARE YOUR FIREBASE and GOOGLE AUTHENICATION IMPORTS -->
+        <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase.js"></script>
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+        <link rel="stylesheet" type="text/css" href="index.css">
+        <!DOCTYPE html>
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+        <!-- Top NavBar -->
+        <nav>
+            <div class="nav-wrapper">
+            <a href="#" class="brand-logo right"><img id="upics" height=55 width=55 class="circle"></img></a>
+            <ul class="left hide-on-med-and-down">
+                <li><a href="fdhome.html">Home</a></li>
+                <li class="active"><a href="fdforum.html">Forums</a></li>
+
+            </ul>
+        </div>
+    </nav>
+
+        <!-- SideNav menu-->
+        <ul id="slide-out" class="sidenav">
+                <li><div class="user-view">
+                    <div class="background">
+                        <img src="images/office.jpg">
+                    </div>
+                    <a href="#user"><img class="circle" id="upicsides"></a>
+                    <a href="#name"><span class="white-text name">Luke Nathan</span></a>
+                    <a href="#email"><span class="white-text email">luke.nathan@ucc.on.ca</span></a>
+                </div></li>
+                <li><a class="waves-effect" onclick="signin()">Sign in with Google</a></li>
+                <li><a class="waves-effect" href="#!">Second Link</a></li>
+                <li><div class="divider"></div></li>
+                <li><a class="subheader">Account Settings</a></li>
+                <li><a class="waves-effect" href="https://myaccount.google.com/?pli=1">Google Account Settings</a></li>
+                <li><a class="waves-effect" href="#!">Account Options</a></li>
+            </ul>
+            <a href="#" data-target="slide-out" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
+
+</head>
+
+<body>
+
+<br>
+
+<div class="row">
+    <div class="col s12 m12">
+        <div class="card grey lighten-4">
+        <div class="card-content grey-text text-darken-3">
+            <span class="card-title">When is assembly today? (this one works)</span>
+            <h6>Posted By: Hongli Wang</h6>
+            <br>
+            <p>Hi, I was just wondering when assembly was today? Some how I forgot when assembly was on Mondays and nobody else I've
+                asked knows when it is either. I'm at home becaue I had a p1 spare but I didn't know when to wake up so I just woke up
+                at 9 and now I don't know when to get to school. I really don't want to get to school early or late, so please respond
+                quickly. I am now filling this card up with filler text. This following paragraph is from D2: <br><br> When creating our plan, 
+                we didn't realize the scope of what we were planning, resulting in it involving way more work than we were able to do, as most 
+                of the features were removed. These removed features include forums, groups, multiple classes, and the implementation of Terry's 
+                idea. This is unfortunate, though we wanted to have a good but small project instead of a bad but large project. We unfortunately 
+                way overestimated our abilities, so overall the plan was not that successful, though we were able to complete a lot of it. 
+                This next paragraph is also from D2 but it is the next section, target audience<br><br>
+                Firstly, we were able to stay true to our target audience. While we did remove a lot of features from our website, the core 
+                function of it stayed the same. This means that even though it is a very simple website, the target audience we are developing 
+                it for is the same as it was when it was a bigger scope. Having our target audience in mind while developing the app really
+                helped, as we were able to create a product more catered to our age than younger or older clients. Ultimately, our target
+                audience was successful, as we didn't have to change it. This final paragraph is also from D2, GANTT Chart - Dates <br><br>
+                When creating the GANTT chart, we included a full calendar system of when each task would be done and completed. Unfortunately,
+                partly due to the removal of many tasks, we were unable to follow this system. Many of our inabilities to follow the times 
+                however also come with scheduling errors in the actual GANTT chart. Firstly, we planned on completing C4 - Changes to 
+                Plan, before we even started coding our website. This was common for most of the write-ups, as we didn't know how long 
+                they would take, and how time consuming coding the website would be. Apart from scheduling errors, the other reason we 
+                were unable to follow the times we set was because how time consuming each task was. For example, we spent over a month 
+                on the messages and classes pages, so we were unable to stop working on those and move on to another task, While this means 
+                that ultimately our time allocations of our GANTT chart were pretty unsuccessful, they still did help us keep somewhat on 
+                track while working in class. Thanks, I would appreciate if you could answer this quickly. - Terry Wang
+
+            </p>
+        </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+        <div class="col s12 m12">
+            <div class="card grey lighten-4">
+            <div class="card-content grey-text text-darken-3">
+                <span class="card-title">Comments</span>
+                <br>
+                <div class="card">
+                    <div align="left" class="card-content black-text">
+                        <ul class="collection grey lighten-4">
+                            <li class="collection-item avatar">
+                                <i class="material-icons circle blue">airport_shuttle</i>
+                                <span class="title">Luke Nathan</span><br>
+                                <span>Assembly today is at 10</span>
+                                </span>
+                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                            </li>
+                            <li class="collection-item avatar">
+                                <i class="material-icons circle">folder</i>
+                                <span class="title">Terry Wang</span>
+                                <p>Wait i think i messed up the title i don't know what (this one works) is i dont know how that got there</p>
+                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                            </li>
+                            <li class="collection-item avatar">
+                                <i class="material-icons circle green">insert_chart</i>
+                                <span class="title">Luca Adamo</span>
+                                <p>Good post Hongli! We are all very proud of you, you should keep posting</p>
+                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                            </li>
+                            <li class="collection-item avatar">
+                                <i class="material-icons circle red">play_arrow</i>
+                                <span class="title">Jason Lee</span>
+                                <p>This is the example of a two line comment. When creating our plan, we didn't realize the scope of what 
+                                    we were planning, resulting in it involving way more work <br> than we were able to do, as most of the features 
+                                    were removed. </p>
+                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                            </li>
+                            <li class="collection-item avatar">
+                                <i class="material-icons circle orange">airplay</i>
+                                <span class="title">Justin Lo</span>
+                                <p>What is (this one works)? what does that mean
+                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                            </li>
+                            <li class="collection-item avatar">
+                                <i class="material-icons circle purple">archive</i>
+                                <span class="title">Will Trojniak</span>
+                                <p>What does (this one works) mean? Like Terry how do you accidentally type in three words inside brackets
+                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                            </li>
+                            <li class="collection-item avatar">
+                                <i class="material-icons circle brown">art_track</i>
+                                <span class="title">Eric An</span>
+                                <p>10</p>
+                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>

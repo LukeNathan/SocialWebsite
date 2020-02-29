@@ -1,0 +1,71 @@
+<html>
+    <head>
+        <!-- HERE ARE YOUR FIREBASE and GOOGLE AUTHENICATION IMPORTS -->
+        <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase.js"></script>
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+        <link rel="stylesheet" type="text/css" href="index.css">
+        <!DOCTYPE html>
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+        <!-- Top NavBar -->
+        <nav>
+            <div class="nav-wrapper">
+            <a href="#" class="brand-logo right"><img id="upics" height=55 width=55 class="circle"></img></a>
+            <ul class="left hide-on-med-and-down">
+                <li><a href="fdhome.html">Home</a></li>
+                <li class="active"><a href="fdforum.html">Forums</a></li>
+
+            </ul>
+        </div>
+    </nav>
+
+        <!-- SideNav menu-->
+        <ul id="slide-out" class="sidenav">
+                <li><div class="user-view">
+                    <div class="background">
+                        <img src="images/office.jpg">
+                    </div>
+                    <a href="#user"><img class="circle" id="upicsides"></a>
+                    <a href="#name"><span class="white-text name">Luke Nathan</span></a>
+                    <a href="#email"><span class="white-text email">luke.nathan@ucc.on.ca</span></a>
+                </div></li>
+                <li><a class="waves-effect" onclick="signin()">Sign in with Google</a></li>
+                <li><a class="waves-effect" href="#!">Second Link</a></li>
+                <li><div class="divider"></div></li>
+                <li><a class="subheader">Account Settings</a></li>
+                <li><a class="waves-effect" href="https://myaccount.google.com/?pli=1">Google Account Settings</a></li>
+                <li><a class="waves-effect" href="#!">Account Options</a></li>
+            </ul>
+            <a href="#" data-target="slide-out" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
+
+</head>
+
+<body>
+
+<h1 class="center">Forums</h1>
+
+<div class="center">
+    <a class="waves-effect waves-light btn" href="fdpost.html">New Post</a>
+</div>
+
+<div class="collection">
+    <a href="fdposted.html" class="collection-item">When is assembly today? (this one works)</a>
+    <a href="#!" class="collection-item">English test</a>
+    <a href="#!" class="collection-item">The new schedule sucks</a>
+    <a href="#!" class="collection-item">What courses to pick grade 10 guide</a>
+    <a href="#!" class="collection-item">What grade 10 courses should i pick?</a>
+    <a href="#!" class="collection-item">When is assembly today?</a>
+    <a href="#!" class="collection-item">English test</a>
+    <a href="#!" class="collection-item">The new schedule sucks</a>
+    <a href="#!" class="collection-item">What courses to pick grade 10 guide</a>
+    <a href="#!" class="collection-item">What grade 10 courses should i pick?</a>
+</div>
+
+
+
+</body>
