@@ -1,0 +1,113 @@
+<html>
+    <head>
+        <!-- HERE ARE YOUR FIREBASE and GOOGLE AUTHENICATION IMPORTS -->
+        <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase.js"></script>
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+        <link rel="stylesheet" type="text/css" href="index.css">
+        <!DOCTYPE html>
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+        <!-- Top NavBar -->
+        <nav>
+            <div class="nav-wrapper">
+            <a href="#" class="brand-logo right"><img id="upics" height=55 width=55 class="circle"></img></a>
+            <ul class="left hide-on-med-and-down">
+                <li><a href="gdhome.html">Home</a></li>
+                <li class="active"><a href="gdgroup.html">Groups</a></li>
+
+            </ul>
+        </div>
+    </nav>
+
+        <!-- SideNav menu-->
+        <ul id="slide-out" class="sidenav">
+                <li><div class="user-view">
+                    <div class="background">
+                        <img src="images/office.jpg">
+                    </div>
+                    <a href="#user"><img class="circle" id="upicsides"></a>
+                    <a href="#name"><span class="white-text name">Luke Nathan</span></a>
+                    <a href="#email"><span class="white-text email">luke.nathan@ucc.on.ca</span></a>
+                </div></li>
+                <li><a class="waves-effect" onclick="signin()">Sign in with Google</a></li>
+                <li><a class="waves-effect" href="#!">Second Link</a></li>
+                <li><div class="divider"></div></li>
+                <li><a class="subheader">Account Settings</a></li>
+                <li><a class="waves-effect" href="https://myaccount.google.com/?pli=1">Google Account Settings</a></li>
+                <li><a class="waves-effect" href="#!">Account Options</a></li>
+            </ul>
+            <a href="#" data-target="slide-out" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
+
+</head>
+
+<body>
+
+<div class="row">
+    <div class="col s12 m12">
+        <div class="card grey lighten-4">
+        <div class="card-content grey-text text-darken-3">
+            <span class="card-title">Luke And Terry's Fun Club (this one works)</span>
+            <h6>Created By: Luke Nathan, Terry Wang</h6>
+            <br>
+            <h6>Description:</h6>
+            <p>Luke and Terry's fun club is a club for people who want to have fun. It says so in the name. This is a club that is very real
+                and definitely not made up for the sake of having a club for this demo page. Anyways, have fun reading the same filler text 
+                as the forum post about Terry not wanting to be late for assembly. I am now filling this card up with filler text. This 
+                following paragraph is from D2: <br><br> When creating our plan, 
+                we didn't realize the scope of what we were planning, resulting in it involving way more work than we were able to do, as most 
+                of the features were removed. These removed features include forums, groups, multiple classes, and the implementation of Terry's 
+                idea. This is unfortunate, though we wanted to have a good but small project instead of a bad but large project. We unfortunately 
+                way overestimated our abilities, so overall the plan was not that successful, though we were able to complete a lot of it. 
+                This next paragraph is also from D2 but it is the next section, target audience<br><br>
+                Firstly, we were able to stay true to our target audience. While we did remove a lot of features from our website, the core 
+                function of it stayed the same. This means that even though it is a very simple website, the target audience we are developing 
+                it for is the same as it was when it was a bigger scope. Having our target audience in mind while developing the app really
+                helped, as we were able to create a product more catered to our age than younger or older clients. Ultimately, our target
+                audience was successful, as we didn't have to change it. This final paragraph is also from D2, GANTT Chart - Dates <br><br>
+                When creating the GANTT chart, we included a full calendar system of when each task would be done and completed. Unfortunately,
+                partly due to the removal of many tasks, we were unable to follow this system. Many of our inabilities to follow the times 
+                however also come with scheduling errors in the actual GANTT chart. Firstly, we planned on completing C4 - Changes to 
+                Plan, before we even started coding our website. This was common for most of the write-ups, as we didn't know how long 
+                they would take, and how time consuming coding the website would be. Apart from scheduling errors, the other reason we 
+                were unable to follow the times we set was because how time consuming each task was. For example, we spent over a month 
+                on the messages and classes pages, so we were unable to stop working on those and move on to another task, While this means 
+                that ultimately our time allocations of our GANTT chart were pretty unsuccessful, they still did help us keep somewhat on 
+                track while working in class. Thanks, I would appreciate if you could answer this quickly. - Terry Wang
+
+            </p>
+        </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col s12 m12">
+        <div class="card grey lighten-4">
+        <div class="card-content grey-text text-darken-3">
+            <ul class="collection with-header">
+                <li class="collection-header"><h4>Club Members</h4></li>
+                <li class="collection-item">Luke Nathan (Club Head)</li>
+                <li class="collection-item">Terry Wang (Club Head)</li>
+                <li class="collection-item">Luca Adamo</li>
+                <li class="collection-item">Jason Lee</li>
+                <li class="collection-item">William Trojniak</li>
+                <li class="collection-item">Justin Lo</li>
+                <li class="collection-item">Eric An</li>
+                <li class="collection-item">Michael Thien</li>
+                <li class="collection-item">Ivan Lee</li>
+                <li class="collection-item">Nikita Manyrin</li>
+            </ul>
+        </div>
+        </div>
+        <div class="s12 m12 center">
+            <a class="waves-effect waves-light btn-large">Join Luke And Terry's Fun Club (this one works)</a>
+        </div>
+    </div>
+</div>
+
+</body>
