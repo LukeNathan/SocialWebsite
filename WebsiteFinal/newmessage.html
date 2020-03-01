@@ -132,7 +132,7 @@
        // HERE IS THE FUNCTION TO SHOW HOW TO GET USER DATA
        function getData() {
             //var userId = document.getElementById("uid").innerHTML;
-            firebase.database().ref('/tweets/' + userId).once('value', function(snapshot) {
+            firebase.database().ref('/users/' + userId).once('value', function(snapshot) {
                 var data = snapshot.val();
                 var i;
                 var displayMsg = document.getElementById("outputMsg")
@@ -159,12 +159,12 @@
             var tweet = document.getElementById("tweet").value;
             var vs = Date(Date.now());
             var js_time = vs.toLocaleString();
-            var tweetid = firebase.database().ref('tweets/' + userId + "/").push({tweet: tweet, time: js_time});
+            var tweetid = firebase.database().ref('users/' + userId + "/").push({tweet: tweet, time: js_time});
             document.getElementById("tweet").value = "";
             var li = ('li', userId + ": " + tweet + "at " + js_time)
 
             //var userId = document.getElementById("uid").innerHTML;
-                firebase.database().ref('/tweets/' + userId).once('value', function(snapshot) {
+                firebase.database().ref('/users/' + userId).once('value', function(snapshot) {
                 var data = snapshot.val();
                 var i;
                 var displayMsg = document.getElementById("outputMsg")
@@ -182,7 +182,11 @@
 
         // HERE IS THE FUNCTION TO SHOW HOW TO REMOVE USER DATA FROM EXISTING DATABASE - BE CAREFUL!
         function removeData() {
-            var tweetid = firebase.database().ref('tweets/' + userId + "/").remove();
+            firebase.database().ref('/users/' + userfb).once('value', function(snapshot) {
+                var messageid = firebase.database().ref('users/' + userfb + "/" + Object.keys(snapshot.val())[snapshot.numChildren()-1]).remove();
+                getData()
+           });
+            
         }
         
         function signin() {
