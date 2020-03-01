@@ -159,7 +159,7 @@
             var tweet = document.getElementById("tweet").value;
             var vs = Date(Date.now());
             var js_time = vs.toLocaleString();
-            var tweetid = firebase.database().ref('users/' + userId + "/").push({tweet: tweet, time: js_time});
+            var tweetid = firebase.database().ref('users/' + userId + "/messages/").push({tweet: tweet, time: js_time});
             document.getElementById("tweet").value = "";
             var li = ('li', userId + ": " + tweet + "at " + js_time)
 
