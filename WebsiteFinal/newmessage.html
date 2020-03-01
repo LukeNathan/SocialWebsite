@@ -141,7 +141,8 @@
                     var lastindex = Object.keys(snapshot.val())[i];
                     displayMsg.innerHTML += "<ul class='collection'><p>" + snapshot.val()
             [lastindex].tweet +"</p> <p>Time Posted: " + snapshot.val()
-            [lastindex].time +"</p></ul>"
+            [lastindex].time +"</p> <p>Posted By: " + snapshot.val()
+            [lastindex].userId + "</p> </ul>"
                     }
                 });
        }
