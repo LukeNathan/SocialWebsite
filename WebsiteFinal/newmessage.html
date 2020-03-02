@@ -144,7 +144,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             } // end user null check
             showOthers();
-            checkMessages();
         }); // end check auth state
         
        // HERE IS THE FUNCTION TO SHOW HOW TO GET USER DATA
@@ -268,6 +267,7 @@ var mUser = document.getElementById("recipient");
         function updateSelected() {
             mUser = document.getElementById("recipient").value;
             showMessage();
+            checkMessages();
         }
 
         function sendMessage() {
@@ -275,6 +275,9 @@ var mUser = document.getElementById("recipient");
             //mUser = mUser[mUser.selectedIndex].value;
             if (mUser == "" || mMessage == "" || !mMessage.replace(/\s/g, '').length == true) {
                 return;
+            if (!mMessage.replace(/\s/g, '').length) {
+                return;
+            }
             } else {
                 getDate();
                 firebase.database().ref('/users/' + userId + '/messages/' + mUser).push({message: mMessage, time: messageTime, sender: username});
@@ -338,7 +341,7 @@ var enterText = document.getElementById("userMessage");
 function checkMessages(){
     var time = 0;
     var interval = setInterval(function() { 
-        if (time = 0) { 
+        if (time => 0) { 
             showMessage();
         }
     }, 1000);
