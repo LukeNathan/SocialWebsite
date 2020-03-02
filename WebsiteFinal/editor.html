@@ -191,6 +191,9 @@ var pointTime = {}
         if (monthValue< 10){
             monthValue = "0" + monthValue
         }
+        if (currentHour < 10){
+            currentHour = "0" + currentHour
+        }
         announcementDate = currentMonth + ' ' + currentDate + dateEnding + ', ' + currentYear;
         pointDate = currentShortMonth + ' ' + currentDate;
         if (currentDate < 10){
