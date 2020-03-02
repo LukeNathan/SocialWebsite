@@ -17,50 +17,86 @@
         <!-- Slider -->
         <link rel="stylesheet" type="text/css" href="nouislider.css">
         <script src="nouislider.js"></script>
+
 </head>
 
+<body id="everything">
 
-<!-- Top NavBar -->
-<nav>
-<div class="nav-wrapper">
-<a href="#" class="brand-logo right"><img id="upics" height=55 width=55 class="circle"></img></a>
-<ul class="left hide-on-med-and-down">
-    <li class="active"><a href="index.html">Home</a></li>
-    <li><a href="newmessage.html">Messages</a></li>
-</ul>
-</div>
-</nav>
+    <!-- Top NavBar -->
+    <nav>
+        <div class="nav-wrapper">
+        <a href="#" class="brand-logo right" data-target="slide-out"><img id="upic" height=55 width=55 class="circle" style="margin-top:3.7px"></img></a>
+        <ul class="left hide-on-med-and-down">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="newmessage.html">Messages</a></li>
+        </ul>
+        <ul class="right hide-on-med-and-down">
+            <li><a class="waves-effect waves-light btn red lighten-2" style="margin-right: 77px;" onclick="signin();">Sign In<i class="material-icons right">person</i></a></li>
+        </ul>
+        </div>
+    </nav>
+    <!-- Side Menu -->
+    <ul id="slide-out" class="sidenav">
+        <li><div class="user-view">
+            <div class="background">
+                <img src="images/office.jpg">
+            </div>
+            <img class="circle" id="sidePic">
+            <span class="white-text name" id="sideName"></span>
+            <span class="white-text email" id="sideEmail"></span>
+        </div></li>
+        <li><a class="waves-effect" onclick="signin()">Sign in with Google</a></li>
+        <li><div class="divider"></div></li>
+        <li><a class="subheader">Account Settings</a></li>
+        <li><a class="waves-effect" href="https://myaccount.google.com/?pli=1">Google Account Settings</a></li>
+        <li><a class="waves-effect" href="https://myaccount.google.com/personal-info">Account Options</a></li>
+    </ul>
+    <a href="#" data-target="slide-out" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
 
+    <br>
 
-<br>
-<div class="input-field container">
-<select id="selections" class="browser-default">
-  <!--<option value="" disabled selected>Select Student</option>-->
-  <!--<option value="1">Luke Nathan</option>
-  <option value="2">Terry Wang</option>
-  <option value="3">El</option>-->
-</select>
-</div>
-
-<div class="container">
-    <div style="margin-top:77px"></div>
-    <label style="font-size: 17px;">Number of Points</label>
-    <div id="pointSlider" style="margin:7px 0px 47px 0px"></div>
-    <div class="center-align">
-        <button class="btn-large waves-effect waves-light" type="submit" name="action">Submit
-            <i class="material-icons right">check</i>
-        </button>
+    <div class="input-field container">
+        <select id="selections" class="browser-default">
+            <option value="" disabled selected>Select Student</option>
+        </select>
     </div>
-</div>
+
+    <div class="container">
+        <div style="margin-top:77px"></div>
+        <p style="color:red" id="errorMessage" class="center-align"></p>
+        <label style="font-size: 17px;" id="pointNumber">Number of Points: </label>
+        <!--div id="pointSlider" style="margin:7px 0px 47px 0px"></div-->
+        <p class="range-field">
+            <input type="range" id="pointSlider" min="1" max="10" step="0.01" onchange="displayPoints()"></input>
+        </p>
+        <div class="center-align">
+            <button class="btn-large waves-effect waves-light" type="submit" name="action" onclick="givePoints()">Submit Points
+                <i class="material-icons right">check</i>
+            </button>
+        </div>
+        <div class="input-field">
+            <i class="material-icons prefix">mode_edit</i>
+            <textarea id="announcementMessage" class="materialize-textarea"></textarea>
+            <label for="announcementMessage">Message</label>
+        </div>
+        <div class="center-align">
+            <button class="btn-large waves-effect waves-light" type="submit" name="action" onclick="makeAnnouncement()">Submit Message
+                <i class="material-icons right">check</i>
+            </button>
+        </div>
+    </div>
+
+    <p id="demo"></p>
+    <button class="btn-large waves-effect waves-light" id="demo2" onclick="getDate()">LLL</button>
 
 
 
-<!--div class="container">
-<div class="input-field">
-    <input placeholder="Enter Value" id="entryinput" type="text" class="validate">
-    <label for="entryinput">Score Change</label>
-</div>
-</div-->
+    <!--div class="container">
+    <div class="input-field">
+        <input placeholder="Enter Value" id="entryinput" type="text" class="validate">
+        <label for="entryinput">Score Change</label>
+    </div>
+    </div-->
 
 </body>
 
@@ -95,29 +131,79 @@
                 userEmail = user.email
                 //document.getElementById("upic").src = userImage;
                 //document.getElementById("upicside").src = userImage;
-                //firebase.database().ref('/users/' + userId).set({uid: userId, name: username, email: userEmail, img: userImage, isTeacher: 'false'});
-                showStudents();
-           
+                //firebase.database().ref('/users/' + userId).set({uid: userId, name: username, email: userEmail, img: userImage, isTeacher: 'false'});     
             } // end user null check
+            showStudents();
+            onlyTeachers();
         }); // end check auth state
 
 //Materialize
-    var slider = document.getElementById('pointSlider');
-    noUiSlider.create(slider, {
-        start: 1,
-        connect: 'lower',
-        step: 1,
-        orientation: 'horizontal',
-        range: {
-            'min': 1,
-            'max': 10
-        },
-            format: wNumb({
-                decimals: 1
-        }),
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('select');
+        var instances = M.FormSelect.init(elems);
     });
-        
+
+
+
+
+
 //Functions
+    function onlyTeachers() {
+        var bodyData = document.getElementById("everything");
+        firebase.database().ref('/users/' + userId + '/isTeacher').once('value',function(snapshot) {
+            data = snapshot.val();
+            if (data == 'false') {
+                bodyData.innerHTML = '<nav><div class="nav-wrapper"><a href="#" class="brand-logo right">\
+                <img id="upics" height=55 width=55 class="circle"></img></a><ul class="left hide-on-med-and-down">\
+                <li class="active"><a href="index.html">Home</a></li> <li><a href="classes.html">Classes</a></li>\
+                <li><a href="newmessage.html">Messages</a></li> <li><a href="notifs.html">Notifications</a></li></ul>\
+                </div></nav><h1 class="center-align">No Access</h1>'
+            }
+        });
+    }
+    
+var announcementDate = {}
+var announcementTime = {}
+var pointDate = {}
+var pointTime = {}
+
+    function getDate() {
+        var now = new Date();
+        var currentDate = now.getDate();
+        const monthNames = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"];
+        const shortMonthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        var currentMonth = monthNames[now.getMonth()];
+        var currentShortMonth = shortMonthNames[now.getMonth()];
+        var monthValue = now.getMonth() + 1;
+        var currentYear = now.getFullYear();
+        var currentHour = now.getHours();
+        var currentMinute = now.getMinutes();
+        var currentSecond = now.getSeconds();
+        var dateEnd = currentDate % 10;
+        const endings = ["th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th"]
+        var dateEnding = endings[dateEnd]
+        if (currentMinute < 10){
+            currentMinute = "0" + currentMinute
+        }
+        if (currentSecond < 10){
+            currentSecond = "0" + currentSecond
+        }
+        if (monthValue< 10){
+            monthValue = "0" + monthValue
+        }
+        announcementDate = currentMonth + ' ' + currentDate + dateEnding + ', ' + currentYear;
+        pointDate = currentShortMonth + ' ' + currentDate;
+        if (currentDate < 10){
+            currentDate = "0" + currentDate
+        }
+        announcementTime = currentYear.toString() + monthValue.toString() + currentDate.toString() + currentHour.toString() + currentMinute.toString() + currentSecond.toString();
+        announcementTime = parseInt(announcementTime)
+        pointTime = announcementTime
+    }
+
 
     function showStudents() {
 
@@ -127,32 +213,70 @@
             data = snapshot.val();
             values = Object.values(data);
             for(i = 0; i < values.length; i++){
-                mSelections.innerHTML += "<option>" + values[i].name + " | " + values[i].email + "</option>";
+                mSelections.innerHTML += "<option value='" + values[i].uid +  "'>" + values[i].name + " | " + values[i].email + "</option>";
             }
         });
         
     }
 
     function makeAnnouncement() {
-            var mAnnouncement = document.getElementById("");
-            var js_time = Date.now();
-            sfirebase.database().ref('tweets/' + userId + "/").push({time: js_time});
-    
+            var mAnnouncement = document.getElementById("announcementMessage").value;
+            if(mAnnouncement == ""){
+                return;
+            }
+            getDate();
+            firebase.database().ref('/announcements').push({message: mAnnouncement, date: announcementDate, time: announcementTime});
+            document.getElementById("announcementMessage").value = "";
     }
 
-    function yyyymmdd() {
-        var now = new Date();
-        var y = now.getFullYear();
-        var m = now.getMonth() + 1;
-        var d = now.getDate();
-        var mm = m < 10 ? '0' + m : m;
-        var dd = d < 10 ? '0' + d : d;
-        var fullDate = y + mm + dd;
-        console.log(fullDate)
-        return '' + y + mm + dd;
-}
+
+    function displayPoints() {
+        var mPoints = document.getElementById("pointSlider").value;
+        mPoints = Math.round(mPoints)
+        var mPointDisplay = document.getElementById("pointNumber");
+        mPointDisplay.innerHTML = "Number of Points: " + "<b>" + mPoints + "</b>"
+    }
 
 
+    function givePoints() {
+            var mPoints = document.getElementById("pointSlider").value;
+            var mUser = document.getElementById("selections");
+            var error = document.getElementById("errorMessage");
+            var studentTotal = 0;
+            mPoints = Math.round(mPoints)
+            mUser = mUser[mUser.selectedIndex].value;
+            if (mUser == "") {
+                return;
+            }
+            getDate();
+            firebase.database().ref('/users/' + mUser + '/points').once('value',function(snapshot) {
+                data = snapshot.val();
+                if (data == null){
+                    firebase.database().ref('/users/' + mUser + '/points').push({count: mPoints, date: pointDate, time: pointTime});
+                    firebase.database().ref('/users/' + mUser).update({pointTotal: studentTotal + mPoints, pointAverage: mPoints});
+                    return;
+                }
+                values = Object.values(data);
+                for(i = 0; i < values.length; i++){
+                    studentTotal = studentTotal + parseInt(values[i].count)
+                }
+                var studentAverage = Math.round(((studentTotal + mPoints)/(values.length + 1))*10)/10;
+                var pointDupes = "false"
+                for (i = 0; i < values.length; i++) {
+                    if (values[i].date == pointDate) {
+                        pointDupes = "true"
+                    }
+                }
+                if (pointDupes == "true") {
+                    error.innerHTML = "You have already added a score today"
+                    setTimeout(() => {  error.innerHTML = ""; }, 3000);
+                }
+                else {
+                    firebase.database().ref('/users/' + mUser + '/points').push({count: mPoints, date: pointDate, time: pointTime});
+                    firebase.database().ref('/users/' + mUser).update({pointTotal: studentTotal + mPoints, pointAverage: studentAverage});
+                }
+            });
+    }
 
 
 
