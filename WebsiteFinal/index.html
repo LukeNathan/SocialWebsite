@@ -139,7 +139,8 @@ document.addEventListener('DOMContentLoaded', function() {
             showAnnouncements();
             announcementOrder();
             getPointOrder();
-            setTimeout(() => {  showTotalPoints(); }, 700);
+            setTimeout(() => {  updateStudentPoints(); }, 700);
+            setTimeout(() => {  showTotalPoints(); }, 1400);
             setTimeout(() => {  mainChart.update(); }, 300);
             setTimeout(() => {  mainChart.update(); }, 1000);
         }); // end check auth state
@@ -272,6 +273,9 @@ var studentPlaceFinal = "";
         var userChartPoints = [];
         firebase.database().ref('/users/' + userId + '/points').once('value',function(snapshot) {
             data = snapshot.val();
+            if(data == null){
+                return;
+            }
             values = Object.values(data);
             for(i = 0; i < values.length; i++){
                 userChartPoints.push([values[i].time, values[i].date, values[i].count])
@@ -303,6 +307,15 @@ var studentPlaceFinal = "";
             }
         });
         
+    }
+
+    function updateStudentPoints() {
+        firebase.database().ref('/users/' + userId).once('value',function(snapshot) {
+            data = snapshot.val();
+            if (data.pointTotal === undefined){
+                firebase.database().ref('/users/' + userId).update({pointTotal:0, pointAverage:0});
+            }
+        });
     }
 
 
