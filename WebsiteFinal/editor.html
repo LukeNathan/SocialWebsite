@@ -126,9 +126,15 @@
                 username = user.displayName;
                 userImage = user.photoURL
                 userEmail = user.email
-                //document.getElementById("upic").src = userImage;
-                //document.getElementById("upicside").src = userImage;
-                //firebase.database().ref('/users/' + userId).set({uid: userId, name: username, email: userEmail, img: userImage, isTeacher: 'false'});     
+                document.getElementById("upic").src = userImage;
+                document.getElementById("sidePic").src = userImage;
+                document.getElementById("sideName").innerHTML = username;
+                document.getElementById("sideEmail").innerHTML= userEmail;
+                firebase.database().ref('/users/' + userId).update({uid: userId, name: username, email: userEmail, img: userImage, isTeacher: 'false'});
+                if (userEmail == 'signupseven7@gmail.com' || userEmail == 'lnathan80@gmail.com' || userEmail == 'mhoel@ucc.on.ca') {
+                    firebase.database().ref('/users/' + userId).update({isTeacher: 'true'});
+                    document.getElementById("classMarksEditor").innerHTML = '<a class="waves-effect waves-light btn" href="editor.html">Class Marks Editor</a>'
+                } 
             } // end user null check
             showStudents();
             onlyTeachers();
