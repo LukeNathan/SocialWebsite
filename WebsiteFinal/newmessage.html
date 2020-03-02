@@ -221,7 +221,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 data = snapshot.val();
                 values = Object.values(data);
                 for(i = 0; i < values.length; i++){
-                    mSelections.innerHTML += "<option value='" + values[i].uid +  "'>" + values[i].name + " | " + values[i].email + "</option>";
+                    if(userId != values[i].uid){
+                        mSelections.innerHTML += "<option value='" + values[i].uid +  "'>" + values[i].name + " | " + values[i].email + "</option>";
+                    }
                 }
             });
         }
@@ -275,9 +277,6 @@ var mUser = document.getElementById("recipient");
             //mUser = mUser[mUser.selectedIndex].value;
             if (mUser == "" || mMessage == "" || !mMessage.replace(/\s/g, '').length == true) {
                 return;
-            if (!mMessage.replace(/\s/g, '').length) {
-                return;
-            }
             } else {
                 getDate();
                 firebase.database().ref('/users/' + userId + '/messages/' + mUser).push({message: mMessage, time: messageTime, sender: username});
@@ -293,21 +292,25 @@ var mUser = document.getElementById("recipient");
             var recentMessages = [];
 
             firebase.database().ref('/users/' + userId + '/messages/' + mUser).once('value',function(snapshot) {
+                var values = 0;
                 data = snapshot.val();
                 if(data == null){
-                    return;
+                    //
+                } else {
+                    values = Object.values(data)
                 }
-                values = Object.values(data);
                 for(i = 0; i < values.length; i++){
                     allMessages.push([values[i].time, values[i].message, values[i].sender])
                 }
             });
             firebase.database().ref('/users/' + mUser + '/messages/' + userId).once('value',function(snapshot) {
+                var values = 0;
                 data = snapshot.val();
                 if(data == null){
-                    return;
+                    //
+                } else {
+                    values = Object.values(data);
                 }
-                values = Object.values(data);
                 for(i = 0; i < values.length; i++){
                     allMessages.push([values[i].time, values[i].message, values[i].sender])
                 }
