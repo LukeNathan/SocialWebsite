@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 firebase.database().ref('/users/' + userId).update({uid: userId, name: username, email: userEmail, img: userImage, isTeacher: 'false'});
                 if (userEmail == 'signupseven7@gmail.com' || userEmail == 'lnathan80@gmail.com' || userEmail == 'mhoel@ucc.on.ca') {
                     firebase.database().ref('/users/' + userId).update({isTeacher: 'true'});
-                    document.getElementById("classMarksEditor").innerHTML = '<a class="waves-effect waves-light btn">Class Marks Editor</a>'
+                    document.getElementById("classMarksEditor").innerHTML = '<a class="waves-effect waves-light btn" href="editor.html">Class Marks Editor</a>'
                 }
             } // end user null check
             getChartValues();
