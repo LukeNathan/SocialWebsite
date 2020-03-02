@@ -229,7 +229,8 @@ var pointTime = {}
     function makeAnnouncement() {
             var mAnnouncement = document.getElementById("announcementMessage").value;
             if(mAnnouncement == ""){
-                return;
+                error.innerHTML = "You can't submit blank announcements"
+                setTimeout(() => {  error.innerHTML = ""; }, 3000);
             }
             getDate();
             firebase.database().ref('/announcements').push({message: mAnnouncement, date: announcementDate, time: announcementTime});
