@@ -152,6 +152,14 @@
 
 
 //Functions
+
+    function signin() {
+        var provider = new firebase.auth.GoogleAuthProvider();
+        firebase.auth().signInWithRedirect(provider).then(function(result) { 
+            window.location.replace("fbtest.html");
+        });
+    }
+
     function onlyTeachers() {
         var bodyData = document.getElementById("everything");
         firebase.database().ref('/users/' + userId + '/isTeacher').once('value',function(snapshot) {
@@ -218,7 +226,6 @@ var pointTime = {}
         firebase.database().ref('/users').once('value',function(snapshot) {
             data = snapshot.val();
             values = Object.values(data);
-            console.log(values)
             for(i = 0; i < values.length; i++){
                 mSelections.innerHTML += "<option value='" + values[i].uid +  "'>" + values[i].name + " | " + values[i].email + "</option>";
             }
@@ -229,8 +236,7 @@ var pointTime = {}
     function makeAnnouncement() {
             var mAnnouncement = document.getElementById("announcementMessage").value;
             if(mAnnouncement == ""){
-                error.innerHTML = "You can't submit blank announcements"
-                setTimeout(() => {  error.innerHTML = ""; }, 3000);
+                return;
             }
             getDate();
             firebase.database().ref('/announcements').push({message: mAnnouncement, date: announcementDate, time: announcementTime});

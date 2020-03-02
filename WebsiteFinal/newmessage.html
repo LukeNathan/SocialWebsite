@@ -18,59 +18,40 @@
 
     </head>
 
-    <body onload="getData()">
+    <body>
 
     <nav>
-            <div class="nav-wrapper">
-            <a href="#" class="brand-logo right"><img id="upic" height=55 width=55 class="circle"></img></a>
-            <ul class="left hide-on-med-and-down">
-                <li><a href="index.html">Home</a></li>
-                <li class="active"><a href="newmessage.html">Messages</a></li>
-            </ul>
-            </div>
-        </nav>
-
-    <!-- SideNav menu-->
+        <div class="nav-wrapper">
+        <a href="#" class="brand-logo right" data-target="slide-out"><img id="upic" height=55 width=55 class="circle" style="margin-top:3.7px"></img></a>
+        <ul class="left hide-on-med-and-down">
+            <li><a href="index.html">Home</a></li>
+            <li class="active"><a href="newmessage.html">Messages</a></li>
+        </ul>
+        <ul class="right hide-on-med-and-down">
+            <li><a class="waves-effect waves-light btn red lighten-2" style="margin-right: 77px;" onclick="signin();">Sign In<i class="material-icons right">person</i></a></li>
+        </ul>
+        </div>
+    </nav>
+    <!-- Side Menu -->
     <ul id="slide-out" class="sidenav">
         <li><div class="user-view">
             <div class="background">
                 <img src="images/office.jpg">
             </div>
-            <a href="#user"><img class="circle" id="upicside"></a>
-            <a href="#name"><span class="white-text name">Luke Nathan</span></a>
-            <a href="#email"><span class="white-text email">luke.nathan@ucc.on.ca</span></a>
+            <img class="circle" id="sidePic">
+            <span class="white-text name" id="sideName"></span>
+            <span class="white-text email" id="sideEmail"></span>
         </div></li>
         <li><a class="waves-effect" onclick="signin()">Sign in with Google</a></li>
-        <li><a class="waves-effect" href="#!">Second Link</a></li>
         <li><div class="divider"></div></li>
         <li><a class="subheader">Account Settings</a></li>
         <li><a class="waves-effect" href="https://myaccount.google.com/?pli=1">Google Account Settings</a></li>
-        <li><a class="waves-effect" href="#!">Account Options</a></li>
+        <li><a class="waves-effect" href="https://myaccount.google.com/personal-info">Account Options</a></li>
     </ul>
     <a href="#" data-target="slide-out" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
 
-    <!-- Dropdown Trigger -->
-    <br>
-
-
-  <!-- Dropdown Structure -->
-
-    <div class="input-field col s12">
-        <select>
-            <option value="" disabled selected>   Message a friend</option>
-            <div class="col s6 offset-s1">
-                <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Message</a>
-            </div>
-            <option value="1">   Class</option>
-            <option value="2">   Terry Wang</option>
-            <option value="3">   Luca Adamo</option>
-            <option value="4">   William Trojniak</option>
-        </select>
-        <label>Choose who to message</label>
-    </div>
-
     <!--message collection-->
-    <displayMsg id=outputMsg></displayMsg>
+    <!--displayMsg id=outputMsg></displayMsg>
 
             <form action="/action_page.php">
                 <div class="row">
@@ -87,12 +68,41 @@
             <button class="btn waves-effect waves-light" onclick="pushData()">Submit
                 <i class="material-icons right">send</i>
             </button>
-            <button class="btn waves-effect waves-light" type="submit" name="action" onclick="removeData()">Remove data</button>
+            <button class="btn waves-effect waves-light" type="submit" name="action" onclick="removeData()">Remove data</button-->
+    
+    <div>
+        <div class="input-field container">
+            <select id="recipient" class="browser-default" onchange="updateSelected()">
+                <option value="" disabled selected>Select User</option>
+            </select>
+        </div>
+        <div class="center-align">
+            <ul class="collection" id="messageBox">
+            </ul>
+            
+        </div>
+        <div class="input-field container">
+            <i class="material-icons prefix">mode_edit</i>
+            <textarea id="userMessage" class="materialize-textarea"></textarea>
+            <label for="userMessage">Message</label>
+        </div>
+        <div class="center-align">
+            <button class="btn waves-effect waves-light" type="submit" name="action" onclick="sendMessage()">Send Message
+                <i class="material-icons right">send</i>
+            </button>
+        </div>
+    </div>
 
     </body>
     
     <!-- HERE IS THE JAVASCRIPT TO CONNECT TO YOUR FIREBASE -->
     <script>
+
+//Materialize
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.sidenav');
+    var instances = M.Sidenav.init(elems);
+});
 
     M.AutoInit();
         // Your web app's Firebase configuration
@@ -117,19 +127,28 @@
         // Check to see if you are logged in
         firebase.auth().onAuthStateChanged(function(user) {
             if (user == null) {
-                document.getElementById("uid").innerHTML = "not logged in";
+                //document.getElementById("signInButton").innerHTML = "not logged in";
                 return;
             } else {
                 userId = user.uid; // you can also get .displayName, .photoURL, .email
-                name = user.displayName;
+                username = user.displayName;
                 userImage = user.photoURL
+                userEmail = user.email
                 document.getElementById("upic").src = userImage;
-
+                document.getElementById("sidePic").src = userImage;
+                document.getElementById("sideName").innerHTML = username;
+                document.getElementById("sideEmail").innerHTML= userEmail;
+                firebase.database().ref('/users/' + userId).update({uid: userId, name: username, email: userEmail, img: userImage, isTeacher: 'false'});
+                if (userEmail == 'signupseven7@gmail.com' || userEmail == 'lnathan80@gmail.com' || userEmail == 'mhoel@ucc.on.ca') {
+                    firebase.database().ref('/users/' + userId).update({isTeacher: 'true'});
+                }
             } // end user null check
+            showOthers();
+            checkMessages();
         }); // end check auth state
         
        // HERE IS THE FUNCTION TO SHOW HOW TO GET USER DATA
-       function getData() {
+       /*function getData() {
             //var userId = document.getElementById("uid").innerHTML;
             firebase.database().ref('/users/' + userId).once('value', function(snapshot) {
                 var data = snapshot.val();
@@ -144,17 +163,17 @@
             [lastindex].userId + "</p> </ul>"
                     }
                 });
-       }
+       }*/
        
        // HERE IS THE FUNCTION TO SHOW HOW TO SET/OVERWRITE USER DATA
-       function setData() {
+       /*function setData() {
            var userId = document.getElementById("uid").innerHTML;
            var js_time = ts.toLocaleString();
            firebase.database().ref('/tweets/' + userId).set({tweet:"Set overwrites the data widehard", time: js_time}); 
-       }
+       }*/
          
         // HERE IS THE FUNCTION TO SHOW HOW TO PUSH/ADD NEW USER DATA TO EXISTING DATABASE
-        function pushData() {
+        /*function pushData() {
             var tweet = document.getElementById("tweet").value;
             var vs = Date(Date.now());
             var js_time = vs.toLocaleString();
@@ -177,16 +196,16 @@
                     }
                 });
             
-        }
+        }*/
 
         // HERE IS THE FUNCTION TO SHOW HOW TO REMOVE USER DATA FROM EXISTING DATABASE - BE CAREFUL!
-        function removeData() {
+        /*function removeData() {
             firebase.database().ref('/users/' + userfb).once('value', function(snapshot) {
                 var messageid = firebase.database().ref('users/' + userfb + "/" + Object.keys(snapshot.val())[snapshot.numChildren()-1]).remove();
                 getData()
            });
             
-        }
+        }*/
         
         function signin() {
             var provider = new firebase.auth.GoogleAuthProvider();
@@ -195,24 +214,139 @@
             });
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
-            var elems = document.querySelectorAll('.sidenav');
-            var instances = M.Sidenav.init(elems);
-        });
+        function showOthers() {
+
+            mSelections = document.getElementById("recipient");
+
+            firebase.database().ref('/users').once('value',function(snapshot) {
+                data = snapshot.val();
+                values = Object.values(data);
+                for(i = 0; i < values.length; i++){
+                    mSelections.innerHTML += "<option value='" + values[i].uid +  "'>" + values[i].name + " | " + values[i].email + "</option>";
+                }
+            });
+        }
+
+var messageTime = {}
+
+        function getDate() {
+            var now = new Date();
+            var currentDate = now.getDate();
+            var monthValue = now.getMonth() + 1;
+            var currentYear = now.getFullYear();
+            var currentHour = now.getHours();
+            var currentMinute = now.getMinutes();
+            var currentSecond = now.getSeconds();
+            var currentMilli = now.getMilliseconds();
+            if (currentMinute < 10){
+                currentMinute = "0" + currentMinute
+            }
+            if (currentSecond < 10){
+                currentSecond = "0" + currentSecond
+            }
+            if (monthValue< 10){
+                monthValue = "0" + monthValue
+            }
+            if (currentHour < 10){
+                currentHour = "0" + currentHour
+            }
+            if (currentDate < 10){
+                currentDate = "0" + currentDate
+            }
+            if (currentMilli >= 10 && currentMilli <=100){
+                currentMilli = "0" + currentMilli
+            }
+            if (currentMilli < 10){
+                currentMilli = "0" + "0" + currentMilli
+            }
+            messageTime = currentYear.toString() + monthValue.toString() + currentDate.toString() + currentHour.toString() + currentMinute.toString() + currentSecond.toString() + currentMilli.toString();
+            messageTime = parseInt(messageTime)
+        }
+
+var mUser = document.getElementById("recipient");
+
+        function updateSelected() {
+            mUser = document.getElementById("recipient").value;
+            showMessage();
+        }
+
+        function sendMessage() {
+            var mMessage = document.getElementById("userMessage").value;
+            //mUser = mUser[mUser.selectedIndex].value;
+            if (mUser == "" || mMessage == "" || !mMessage.replace(/\s/g, '').length == true) {
+                return;
+            if (!mMessage.replace(/\s/g, '').length) {
+                return;
+            }
+            } else {
+                getDate();
+                firebase.database().ref('/users/' + userId + '/messages/' + mUser).push({message: mMessage, time: messageTime, sender: username});
+                document.getElementById("userMessage").value = "";
+                showMessage();
+            }
+        }
+
+        function showMessage() {
+            mShowMessages = document.getElementById("messageBox");
+            var allMessages = [];
+            var userMessages = [];
+            var recentMessages = [];
+
+            firebase.database().ref('/users/' + userId + '/messages/' + mUser).once('value',function(snapshot) {
+                data = snapshot.val();
+                if(data == null){
+                    return;
+                }
+                values = Object.values(data);
+                for(i = 0; i < values.length; i++){
+                    allMessages.push([values[i].time, values[i].message, values[i].sender])
+                }
+            });
+            firebase.database().ref('/users/' + mUser + '/messages/' + userId).once('value',function(snapshot) {
+                data = snapshot.val();
+                if(data == null){
+                    return;
+                }
+                values = Object.values(data);
+                for(i = 0; i < values.length; i++){
+                    allMessages.push([values[i].time, values[i].message, values[i].sender])
+                }
+                allMessages.sort(function(a, b){return b[0]-a[0]});
+                for(i = 0; i < 10 && i < allMessages.length; i++){
+                    recentMessages.push(allMessages[i]);
+                }
+                recentMessages.reverse();
+            });
+            setTimeout(() => {
+                mShowMessages.innerHTML = "";
+                for(i = 0; i < recentMessages.length; i++){
+                    mShowMessages.innerHTML += `<li class="collection-item left-align">  
+                    <span style="margin-top:0px;margin-bottom:0px;font-family:'Roboto',sans-serif;font-weight:400;font-size:17px">`
+                    + recentMessages[i][2] + `: </span><span style="margin-top:0px;margin-bottom:0px;\
+                    font-family:'Roboto',sans-serif;font-weight:200;font-size:14px">` + recentMessages[i][1] + `</span></li>`;
+                }
+            }, 300);
+        }
        
+//Enter to send
+var enterText = document.getElementById("userMessage");
+    enterText.addEventListener("keydown", function(event) {
+    if (event.keyCode == 13) {
+        sendMessage();
+        event.preventDefault();
+    }
+});
 
-       // $(document).ready(function() {
-            //$('input#tweet').characterCounter();
-        //});
+//Check for messages
+function checkMessages(){
+    var time = 0;
+    var interval = setInterval(function() { 
+        if (time = 0) { 
+            showMessage();
+        }
+    }, 1000);
+}
 
-        //function gotData(data) { 
-           // var msgs = .val();
-            //var keys = Object.keys(msgs);
-            //console.log(keys);
-        //}
-
-        //rule:  ".validate": "newData.hasChildren(['tweet', 'time']) && newData.child('time').val() > (now - 300)"
 
     </script>
 </html>
-
