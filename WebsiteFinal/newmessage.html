@@ -275,9 +275,6 @@ var mUser = document.getElementById("recipient");
             //mUser = mUser[mUser.selectedIndex].value;
             if (mUser == "" || mMessage == "" || !mMessage.replace(/\s/g, '').length == true) {
                 return;
-            if (!mMessage.replace(/\s/g, '').length) {
-                return;
-            }
             } else {
                 getDate();
                 firebase.database().ref('/users/' + userId + '/messages/' + mUser).push({message: mMessage, time: messageTime, sender: username});
