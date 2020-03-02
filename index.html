@@ -1,68 +1,105 @@
-
-<!-- Welcome to some sample code to control your Firebase Database -->
-<!-- HERE IS YOUR HTML TO SET UP YOUR PAGE -->
+<!DOCTYPE html>
 <html>
-    <head>
-        <!-- HERE ARE YOUR FIREBASE and GOOGLE AUTHENICATION IMPORTS -->
-        <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase.js"></script>
-        <script src="https://apis.google.com/js/platform.js" async defer></script>
-        <link rel="stylesheet" type="text/css" href="index.css">
-        <!DOCTYPE html>
-        <!-- Compiled and minified CSS -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <head>
+                <!-- HERE ARE YOUR FIREBASE and GOOGLE AUTHENICATION IMPORTS -->
+                <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase.js"></script>
+                <script src="https://apis.google.com/js/platform.js" async defer></script>
+                <!DOCTYPE html>
+                <!-- Compiled and minified CSS -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+                <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap" rel="stylesheet">
+                <!-- Compiled and minified JavaScript -->
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+                <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+                <!-- Chart -->
+                <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+        </head>
 
-        <!-- Compiled and minified JavaScript -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-       <nav>
-            <div class="nav-wrapper">
-            <a href="#" class="brand-logo right"><img id="upic" height=55 width=55 class="circle"></img></a>
-            <ul class="left hide-on-med-and-down">
-                <li class="active"><a href="sass.html">Home</a></li>
-                <li><a href="classes.html">Classes</a></li>
-                <li><a href="msgs.html">Messages</a></li>
-                <li><a href="notifs.html">Notifications</a></li>
-            </ul>
-            </div>
-        </nav>
-
-    </head>
-    <body>
-        <div align="center">
-            <h1>Welcome, </h1>
-            <h1 id="uid"></h1>
-            <img id="upic" height=100 width=100 class="circle"></img>
+    <!-- Top NavBar -->
+    <nav>
+        <div class="nav-wrapper">
+            <img id="upic" height=55 width=55 class="circle brand-logo right" style="margin-top:3.7px"></img>
+        <ul class="left hide-on-med-and-down">
+            <li class="active"><a href="index.html">Home</a></li>
+            <li><a href="newmessage.html">Messages</a></li>
+        </ul>
+        <ul class="right hide-on-med-and-down">
+            <li><a class="waves-effect waves-light btn red lighten-2" style="margin-right: 77px;" onclick="signin();">Sign In<i class="material-icons right">person</i></a></li>
+        </ul>
         </div>
-        <button class="btn waves-effect waves-light" type="submit" name="action" onclick="signin()">Sign in with Google</button>
-            <div id="info"></div>
+    </nav>
+    <!-- Side Menu -->
+    <ul id="slide-out" class="sidenav">
+        <li><div class="user-view">
+            <div class="background">
+                <img src="images/office.png">
+            </div>
+            <img class="circle" id="sidePic">
+            <span class="white-text name" id="sideName"></span>
+            <span class="white-text email" id="sideEmail"></span>
+        </div></li>
+        <li><a class="waves-effect" onclick="signin()">Sign in with Google</a></li>
+        <li><div class="divider"></div></li>
+        <li><a class="subheader">Account Settings</a></li>
+        <li><a class="waves-effect" href="https://myaccount.google.com/?pli=1">Google Account Settings</a></li>
+        <li><a class="waves-effect" href="https://myaccount.google.com/personal-info">Account Options</a></li>
+    </ul>
+    <a href="#" data-target="slide-out" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
 
-            <form action="/action_page.php">
-                <div class="row">
-                        <form class="col s12">
-                          <div class="row">
-                            <div class="input-field col s6">
-                              <input id="tweet" type="text" data-length="100">
-                              <label for="tweet">Input text</label>
-                            </div>
-                          </div>
-                        </form>
-                </div>
-            </form>
-            <button class="btn waves-effect waves-light" type="submit" name="action" onclick="pushData()">Submit
-                <i class="material-icons right">send</i>
-            </button>
-            <button class="btn waves-effect waves-light" type="submit" name="action" onclick="getData()">Get data</button>
-            <button class="btn waves-effect waves-light" type="submit" name="action" onclick="setData()">Edit data</button>
-            <button class="btn waves-effect waves-light" type="submit" name="action" onclick="updateData()">Update data</button>
-            <button class="btn waves-effect waves-light" type="submit" name="action" onclick="removeData()">Remove data</button>
-
-    <displayMsg id=outputMsg></displayMsg>
-
-    </body>
+    <h1 align=center>Your Class</h1>
+    <div class="center-align" style="margin-bottom:30px" id="classMarksEditor">
+    </div>
     
-    <!-- HERE IS THE JAVASCRIPT TO CONNECT TO YOUR FIREBASE -->
-    <script>
+    <div class="row center-align">
+        <div class="col s12 m6 offset-s6">
+            <h4 class="center-align">Daily Points</h4>
+            <h6 style="color:grey;" id="chartScore"></h6>
+            <canvas align="center" id="classChart" width="50%" height="57px" class="col s1"></canvas>
+        </div>
+
+        <div class="col s12 m6">
+            <div class="card">
+            <div align="left" class="card-content black-text">
+                <span style="font-family:'Roboto',sans-serif;font-weight:400;font-size:37px">Grade Leaderboard</span><br>
+                <div id="PointDisplayLoad"></div>
+                <div id="personalPointDisplay"></div>
+                <ul class="collection" id="classRankings">
+                </ul>
+            </div>
+            </div>
+        </div>
+        <div class="col s10 offset-s1">
+            <div class="card">
+                <ul class="collection with-header" id="announcementBox">
+                    <li class="collection-header"><h4>Class Announcements</h4>
+                        <a class="waves-effect waves-teal btn-flat" onclick="showAllAnnouncements()">Show All</a>
+                    </li>       
+                </ul>
+
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
+
+<script>
+//Chart Info
+var ctx = document.getElementById('classChart').getContext('2d');
+var chartDates = [];
+var chartData = [];
+var chartBackground = [];
+var chartBorder = []
+
+//Materialize
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.sidenav');
+    var instances = M.Sidenav.init(elems, {edge:'right'});
+});
+
+//Others
+
         // Your web app's Firebase configuration
         userId = "";
 
@@ -81,95 +118,238 @@
         // Check to see if you are logged in
         firebase.auth().onAuthStateChanged(function(user) {
             if (user == null) {
-                document.getElementById("uid").innerHTML = "not logged in";
+                //document.getElementById("uid").innerHTML = "not logged in";
                 return;
             } else {
                 userId = user.uid; // you can also get .displayName, .photoURL, .email
-                name = user.displayName;
+                username = user.displayName;
                 userImage = user.photoURL
-                document.getElementById("uid").innerHTML = name; // display Google uid on page
+                userEmail = user.email
                 document.getElementById("upic").src = userImage;
-
-                
+                document.getElementById("sidePic").src = userImage;
+                document.getElementById("sideName").innerHTML = username;
+                document.getElementById("sideEmail").innerHTML= userEmail;
+                firebase.database().ref('/users/' + userId).update({uid: userId, name: username, email: userEmail, img: userImage, isTeacher: 'false'});
+                if (userEmail == 'signupseven7@gmail.com' || userEmail == 'lnathan80@gmail.com' || userEmail == 'mhoel@ucc.on.ca') {
+                    firebase.database().ref('/users/' + userId).update({isTeacher: 'true'});
+                    document.getElementById("classMarksEditor").innerHTML = '<a class="waves-effect waves-light btn" href="editor.html">Class Marks Editor</a>'
+                }
             } // end user null check
+            getChartValues();
+            showAnnouncements();
+            announcementOrder();
+            getPointOrder();
+            setTimeout(() => {  updateStudentPoints(); }, 700);
+            setTimeout(() => {  showTotalPoints(); }, 300);
+            setTimeout(() => {  showTotalPoints(); }, 1400);
+            setTimeout(() => {  mainChart.update(); }, 300);
+            setTimeout(() => {  mainChart.update(); }, 1000);
         }); // end check auth state
-        
-       // HERE IS THE FUNCTION TO SHOW HOW TO GET USER DATA
-       function getData() {
-            var userId = document.getElementById("uid").innerHTML;
-                firebase.database().ref('/tweets/' + userId).once('value', function(snapshot) {
-                var data = snapshot.val();
-                var i;
-                var displayMsg = document.getElementById("outputMsg")
-                displayMsg.innerHTML = ""
-                for (i=snapshot.numChildren()-1; i >= 0; i--){
-                    var lastindex = Object.keys(snapshot.val())[i];
-                    displayMsg.innerHTML += "<div class='card'><p>" + snapshot.val()
-            [lastindex].tweet +"</p> <p>Time Posted: " + snapshot.val()
-            [lastindex].time +"</p></div>"
-                    }
-                });
-       }
-       
-       // HERE IS THE FUNCTION TO SHOW HOW TO SET/OVERWRITE USER DATA
-       function setData() {
-           var userId = document.getElementById("uid").innerHTML;
-           var js_time = Date.now();
-           firebase.database().ref('/tweets/' + userId).set({tweet:"Set overwrites the data widehard", time: js_time}); 
-       }
-        
-       // HERE IS THE FUNCTION TO SHOW HOW TO SET/OVERWRITE USER DATA
-       function updateData() {
-           var userId = document.getElementById("uid").innerHTML;
-           firebase.database().ref('/tweets/' + userId).update({tweet:"Update replaces data, but will leave non replaced data as is"}); 
-       }
-         
-        // HERE IS THE FUNCTION TO SHOW HOW TO PUSH/ADD NEW USER DATA TO EXISTING DATABASE
-        function pushData() {
-            var userId = document.getElementById("uid").innerHTML;
-            var tweet = document.getElementById("tweet").value;
-            var js_time = Date.now();
-            var tweetid = firebase.database().ref('tweets/' + userId + "/").push({tweet: tweet, time: js_time});
-            document.getElementById("tweet").value = "";
-            var li = ('li', userId + ": " + tweet + "at " + js_time)
 
-            var userId = document.getElementById("uid").innerHTML;
-                firebase.database().ref('/tweets/' + userId).once('value', function(snapshot) {
-                var data = snapshot.val();
-                var i;
-                var displayMsg = document.getElementById("outputMsg")
-                displayMsg.innerHTML = ""
-                for (i=snapshot.numChildren()-1; i >= 0; i--){
-                    var lastindex = Object.keys(snapshot.val())[i];
-                    displayMsg.innerHTML += "<div class='card'><p>" + snapshot.val()
-            [lastindex].tweet +"</p> <p>Time Posted: " + snapshot.val()
-            [lastindex].time +"</p></div>"
-                    }
-                });
-            
+//Functions
+
+function signin() {
+    var provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithRedirect(provider).then(function(result) { 
+        window.location.replace("fbtest.html");
+    });
+}
+
+var announcementMessages = [];
+var announcementDate = [];
+
+    function announcementOrder() {
+        firebase.database().ref('/announcements').once('value',function(snapshot) {
+            data = snapshot.val();
+            values = Object.values(data);
+            var timePosted = [];
+            var timeOnly = [];
+            for(i = 0; i < values.length; i++){
+                timePosted.push([values[i].time, values[i].message, values[i].date]);
+            }
+            timePosted.sort(function(a, b){return b[0]-a[0]});
+            for(i = 0; i < timePosted.length; i++){
+                announcementMessages.push(timePosted[i][1])
+                announcementDate.push(timePosted[i][2])
+            }
+        });
+    }
+
+
+    function showAnnouncements() {
+
+        mAnnouncements = document.getElementById("announcementBox");
+
+        firebase.database().ref('/announcements').once('value',function(snapshot) {
+            data = snapshot.val();
+            values = Object.values(data);
+            mAnnouncements.innerHTML = '<ul class="collection with-header" id="announcementBox" style="margin:0px">\
+            <li class="collection-header"><h4>Class Announcements</h4>\
+            <a class="waves-effect waves-teal btn-flat" onclick="showAllAnnouncements()">Show All</a></li></ul>'
+            for(i = 0; i < values.length && i <= 9; i++){
+                mAnnouncements.innerHTML += '<li class="collection-item valign-wrapper">' + "<b>" + announcementDate[i] + ":</b>&nbsp;" + announcementMessages[i] + "</li>";
+            }
+        });
+    }
+    
+    function showAllAnnouncements() {
+
+        mAnnouncements = document.getElementById("announcementBox");
+
+        firebase.database().ref('/announcements').once('value',function(snapshot) {
+            data = snapshot.val();
+            values = Object.values(data);
+            mAnnouncements.innerHTML = '<ul class="collection with-header" id="announcementBox" style="margin:0px">\
+            <li class="collection-header"><h4>Class Announcements</h4>\
+            <a class="waves-effect waves-teal btn-flat" onclick="showAnnouncements()">Show Less</a></li></ul>'
+            for(i = 0; i < values.length; i++){
+                mAnnouncements.innerHTML += '<li class="collection-item valign-wrapper">' + "<b>" + announcementDate[i] + ":</b>&nbsp;" + announcementMessages[i] + "</li>";
+            }
+        });
+    }
+
+var studentPlaceFinal = "";
+
+
+    function getPointOrder(){
+        var allStudentPoints = [];
+        var studentPlace = "";
+        mPointLoader = document.getElementById("PointDisplayLoad");
+        mPointLoader.innerHTML='<div class="progress"><div class="indeterminate"></div></div>';
+        leaderboard = document.getElementById("classRankings")
+
+        firebase.database().ref('/users/').once('value',function(snapshot) {
+            data = snapshot.val();
+            values = Object.values(data);
+            for(i = 0; i < values.length; i++){
+                if (values[i].pointTotal == undefined){
+                    allStudentPoints.push([0, 0, values[i].name, values[i].img]);
+                }
+                else{
+                    allStudentPoints.push([values[i].pointTotal, values[i].pointAverage, values[i].name, values[i].img]);
+                }
+            }
+            allStudentPoints.sort(function(a, b){return b[0]-a[0]});
+            var sameStudentPoints = [];
+            for(i = 0; i < allStudentPoints.length; i++){
+                if(username == allStudentPoints[i][2]){
+                    studentPlace = i+1
+                }
+            }
+            var placeEnd = studentPlace % 10;
+            const endings = ["th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th"]
+            var placeEnding = endings[placeEnd]
+            studentPlaceFinal = studentPlace + placeEnding
+            for(i = 0; i < 7; i++){
+                leaderboard.innerHTML += ' <li class="collection-item avatar"><img class="circle" alt="" src="' + allStudentPoints[i][3] + 
+                '"></i><span class="title">' + allStudentPoints[i][2] + '</span><br><span>' + allStudentPoints[i][1] + 
+                '</span><span> average points</span><br><span>' + allStudentPoints[i][0] + '</span><span> total points</span></li>'
+            }
+        });
+    }
+
+    function showTotalPoints() {
+        mPointDisplay = document.getElementById("personalPointDisplay");
+        mPointLoader = document.getElementById("PointDisplayLoad");
+        mPointLoader.innerHTML='';
+        mChartPoints = document.getElementById("chartScore");
+
+        firebase.database().ref('/users/' + userId).once('value',function(snapshot) {
+            data = snapshot.val();
+            values = Object.values(data);
+            mPointDisplay.innerHTML = "";
+            mPointDisplay.innerHTML += `<span style="font-family: 'Roboto',sans-serif;font-weight:200;font-size:30px">\
+            Total Points: </span><span style="font-family:'Roboto',sans-serif;font-weight:400;font-size:30px">` +
+            data.pointTotal + '</span><br>' +
+            `<span style="font-family: 'Roboto',sans-serif;font-weight:200;font-size:30px">\
+            Average Points: </span><span style="font-family:'Roboto',sans-serif;font-weight:400;font-size:30px">` +
+            data.pointAverage + '</span><br>' +
+            `<span style="font-family: 'Roboto',sans-serif;font-weight:200;font-size:30px">\
+            You are in: </span><span style="font-family:'Roboto',sans-serif;font-weight:400;font-size:30px">` +
+            studentPlaceFinal+ '</span><br>'
+            mChartPoints += "Your Score: " + data.pointTotal
+        });
         }
 
-        // HERE IS THE FUNCTION TO SHOW HOW TO REMOVE USER DATA FROM EXISTING DATABASE - BE CAREFUL!
-        function removeData() {
-            var tweetid = firebase.database().ref('tweets/' + userId + "/").remove();
-        }
+    function getChartValues() {
+        var userChartPoints = [];
+        firebase.database().ref('/users/' + userId + '/points').once('value',function(snapshot) {
+            data = snapshot.val();
+            if(data == null){
+                return;
+            }
+            values = Object.values(data);
+            for(i = 0; i < values.length; i++){
+                userChartPoints.push([values[i].time, values[i].date, values[i].count])
+            }
+            userChartPoints.sort(function(a, b){return a[0]-b[0]});
+            for(i = 0; i < 5; i++){
+                chartDates.push(userChartPoints[i][1])
+                chartData.push(userChartPoints[i][2])
+                if(userChartPoints[i][2] == 9 || userChartPoints[i][2] == 10){
+                    chartBackground.push('rgba(115, 201, 119, 0.5)');
+                    chartBorder.push('rgba(115, 201, 119, 1)');
+                } else if(userChartPoints[i][2] == 7 || userChartPoints[i][2] == 8){
+                    chartBackground.push('rgba(126, 224, 131, 0.5)');
+                    chartBorder.push('rgba(126, 224, 131, 1)');
+                } else if(userChartPoints[i][2] == 5 || userChartPoints[i][2] == 6){
+                    chartBackground.push('rgba(75, 192, 192, 0.5)');
+                    chartBorder.push('rgba(75, 192, 192, 1)');
+                } else if(userChartPoints[i][2] == 3 || userChartPoints[i][2] == 4){
+                    chartBackground.push('rgba(255, 206, 86, 0.5)');
+                    chartBorder.push('rgba(255, 206, 86, 1)');
+                } else if(userChartPoints[i][2] == 1 || userChartPoints[i][2] == 2) {
+                    chartBackground.push('rgba(255, 99, 132, 0.5)');
+                    chartBorder.push('rgba(255, 99, 132, 1)');
+                } else{
+                    chartBackground.push('rgba(111, 111, 111, 0.5)');
+                    chartBorder.push('rgba(111, 111, 111, 1)');
+                }
+                
+            }
+        });
         
-        function signin() {
-            var provider = new firebase.auth.GoogleAuthProvider();
-            firebase.auth().signInWithRedirect(provider).then(function(result) { 
-                window.location.replace("fbtest.html");
-            });
+    }
+
+    function updateStudentPoints() {
+        firebase.database().ref('/users/' + userId).once('value',function(snapshot) {
+            data = snapshot.val();
+            if (data.pointTotal === undefined){
+                firebase.database().ref('/users/' + userId).update({pointTotal:0, pointAverage:0});
+            }
+        });
+    }
+
+
+
+
+
+//Chart Data
+var mainChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: chartDates,
+        datasets: [{
+            label: 'Daily Points',
+            data: chartData,
+            backgroundColor: chartBackground,
+            borderColor: chartBorder,
+            borderWidth: 1
+        }]
+    },
+    options: {
+        maintainAspectRatio: false
+    },
+    options: {
+        scales: {
+            yAxes: [{ 
+                ticks: {
+                    min: 0,
+                    max: 10
+                }
+            }]
         }
-       
+    },
+});
 
-       // $(document).ready(function() {
-            //$('input#tweet').characterCounter();
-        //});
-
-        //function gotData(data) { 
-           // var msgs = .val();
-            //var keys = Object.keys(msgs);
-            //console.log(keys);
-        //}
-    </script>
-</html>
+</script>
