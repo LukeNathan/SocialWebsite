@@ -145,66 +145,6 @@ document.addEventListener('DOMContentLoaded', function() {
             showOthers();
         }); // end check auth state
         
-       // HERE IS THE FUNCTION TO SHOW HOW TO GET USER DATA
-       /*function getData() {
-            //var userId = document.getElementById("uid").innerHTML;
-            firebase.database().ref('/users/' + userId).once('value', function(snapshot) {
-                var data = snapshot.val();
-                var i;
-                var displayMsg = document.getElementById("outputMsg")
-                displayMsg.innerHTML = ""
-                for (i=snapshot.numChildren()-1; i >= 0; i--){
-                    var lastindex = Object.keys(snapshot.val())[i];
-                    displayMsg.innerHTML += "<ul class='collection'><p>" + snapshot.val()
-            [lastindex].tweet +"</p> <p>Time Posted: " + snapshot.val()
-            [lastindex].time +"</p> <p>Posted By: " + snapshot.val()
-            [lastindex].userId + "</p> </ul>"
-                    }
-                });
-       }*/
-       
-       // HERE IS THE FUNCTION TO SHOW HOW TO SET/OVERWRITE USER DATA
-       /*function setData() {
-           var userId = document.getElementById("uid").innerHTML;
-           var js_time = ts.toLocaleString();
-           firebase.database().ref('/tweets/' + userId).set({tweet:"Set overwrites the data widehard", time: js_time}); 
-       }*/
-         
-        // HERE IS THE FUNCTION TO SHOW HOW TO PUSH/ADD NEW USER DATA TO EXISTING DATABASE
-        /*function pushData() {
-            var tweet = document.getElementById("tweet").value;
-            var vs = Date(Date.now());
-            var js_time = vs.toLocaleString();
-            var tweetid = firebase.database().ref('users/' + userId + "/").push({tweet: tweet, time: js_time});
-            document.getElementById("tweet").value = "";
-            var li = ('li', userId + ": " + tweet + "at " + js_time)
-
-            //var userId = document.getElementById("uid").innerHTML;
-                firebase.database().ref('/users/' + userId).once('value', function(snapshot) {
-                var data = snapshot.val();
-                var i;
-                var displayMsg = document.getElementById("outputMsg")
-                displayMsg.innerHTML = ""
-                for (i=snapshot.numChildren()-1; i >= 0; i--){
-                    var lastindex = Object.keys(snapshot.val())[i];
-                    displayMsg.innerHTML += "<ul class='collection'><p>" + snapshot.val()
-            [lastindex].tweet +"</p> <p>Time Posted: " + snapshot.val()
-            [lastindex].time +"</p> <p>Posted By: " + snapshot.val()
-            [lastindex].userId + "</p> </ul>"
-                    }
-                });
-            
-        }*/
-
-        // HERE IS THE FUNCTION TO SHOW HOW TO REMOVE USER DATA FROM EXISTING DATABASE - BE CAREFUL!
-        /*function removeData() {
-            firebase.database().ref('/users/' + userfb).once('value', function(snapshot) {
-                var messageid = firebase.database().ref('users/' + userfb + "/" + Object.keys(snapshot.val())[snapshot.numChildren()-1]).remove();
-                getData()
-           });
-            
-        }*/
-        
         function signin() {
             var provider = new firebase.auth.GoogleAuthProvider();
             firebase.auth().signInWithRedirect(provider).then(function(result) { 
