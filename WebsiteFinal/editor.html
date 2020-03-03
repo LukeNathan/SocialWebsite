@@ -96,24 +96,22 @@
 
 </body>
 
-
 <script>
 
+    // Your web app's Firebase configuration
+    userId = "";
 
-        // Your web app's Firebase configuration
-        userId = "";
-
-        var config = {
-            apiKey: "AIzaSyDPoyq1ioNdgUn9IpnTFLjo6VwL36YdF38",
-            authDomain: "basic-bc60e.firebaseapp.com",
-            databaseURL: "https://basic-bc60e.firebaseio.com",
-            projectId: "basic-bc60e",
-            storageBucket: "basic-bc60e.appspot.com",
-            messagingSenderId: "510527790639",
-            appId: "1:510527790639:web:5be8ebfafbab992c5070da",
-            measurementId: "G-TDDH2CNDSF"
-          };
-        firebase.initializeApp(config);
+    var config = {
+        apiKey: "AIzaSyDPoyq1ioNdgUn9IpnTFLjo6VwL36YdF38",
+        authDomain: "basic-bc60e.firebaseapp.com",
+        databaseURL: "https://basic-bc60e.firebaseio.com",
+        projectId: "basic-bc60e",
+        storageBucket: "basic-bc60e.appspot.com",
+        messagingSenderId: "510527790639",
+        appId: "1:510527790639:web:5be8ebfafbab992c5070da",
+        measurementId: "G-TDDH2CNDSF"
+      };
+    firebase.initializeApp(config);
                
         // Check to see if you are logged in
         firebase.auth().onAuthStateChanged(function(user) {
